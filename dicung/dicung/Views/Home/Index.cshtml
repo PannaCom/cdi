@@ -1,0 +1,78 @@
+﻿@{
+    string url = Request.Url.Authority + HttpContext.Current.Request.RawUrl.ToString();
+    if (Request.ServerVariables["HTTPS"] == "on")
+    {
+        url = "https://" + url;
+    }
+    else
+    {
+        url = "http://" + url;
+    }
+
+}
+
+@{
+    ViewBag.title = "ĐiCùng.net";
+    ViewBag.des = "";
+    ViewBag.keywords = "";
+    ViewBag.url = url;
+    ViewBag.image = "";
+}
+
+
+<div class="section">
+    <div class="row">
+        <div class="col m4 l4">
+            <h5 class="center">Đặt xe</h5>
+            <div class="row">
+                <form class="col s12" method="get" id="form-booking" name="form-booking">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                            <label for="first_name">First Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input disabled value="I am not editable" id="disabled" type="text" class="validate">
+                            <label for="disabled">Disabled</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" type="password" class="validate">
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" type="email" class="validate">
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            This is an inline input field:
+                            <div class="input-field inline">
+                                <input id="email" type="email" class="validate">
+                                <label for="email" data-error="wrong" data-success="right">Email</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col m8 l8">
+            <div class="icon-block">
+                @*<h2 class="center brown-text"><i class="material-icons">group</i></h2>*@
+                <h5 class="center">Kết quả đặt xe</h5>
+                <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+            </div>
+        </div>
+    </div>
+</div>
