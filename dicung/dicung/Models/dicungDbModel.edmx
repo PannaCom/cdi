@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dicungModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="booking">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="full_name" Type="nvarchar" MaxLength="250" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="pass" Type="nvarchar(max)" />
+          <Property Name="public_code" Type="nvarchar" MaxLength="50" />
+          <Property Name="birth_day" Type="date" />
+          <Property Name="sex" Type="nvarchar" MaxLength="50" />
+          <Property Name="time_go" Type="time" Precision="7" />
+          <Property Name="time_to" Type="time" Precision="7" />
+          <Property Name="from_location" Type="nvarchar" MaxLength="501" />
+          <Property Name="long_from" Type="float" />
+          <Property Name="lat_from" Type="float" />
+          <Property Name="to_location" Type="nvarchar" MaxLength="501" />
+          <Property Name="long_to" Type="float" />
+          <Property Name="lat_to" Type="float" />
+          <Property Name="km1" Type="float" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
+          <Property Name="type_vehicle" Type="nvarchar" MaxLength="151" />
+          <Property Name="des" Type="ntext" />
+          <Property Name="group_id" Type="int" />
+          <Property Name="group_name" Type="nvarchar" MaxLength="501" />
+          <Property Name="status" Type="tinyint" />
+          <Property Name="money" Type="float" />
+          <Property Name="date_time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="group_booking">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="journey ">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="book_id" Type="bigint" />
+          <Property Name="name" Type="nvarchar" MaxLength="251" />
+          <Property Name="from_location" Type="nvarchar" MaxLength="150" />
+          <Property Name="long_from" Type="float" />
+          <Property Name="lat_from" Type="float" />
+          <Property Name="to_location" Type="nvarchar" MaxLength="150" />
+          <Property Name="long_to" Type="float" />
+          <Property Name="lat_to" Type="float" />
+          <Property Name="type_jouney" Type="nvarchar" MaxLength="150" />
+          <Property Name="type_vehicle" Type="nvarchar" MaxLength="151" />
+          <Property Name="days_travel" Type="nvarchar" MaxLength="150" />
+          <Property Name="date_travels" Type="datetime" />
+          <Property Name="departure_time" Type="time" Precision="7" />
+          <Property Name="return_journey" Type="bit" />
+          <Property Name="return_time" Type="time" Precision="7" />
+          <Property Name="list_booking" Type="nvarchar" MaxLength="50" />
+          <Property Name="number_people" Type="int" />
+          <Property Name="is_full" Type="bit" />
+          <Property Name="des" Type="ntext" />
+          <Property Name="is_notify" Type="bit" />
+          <Property Name="km1" Type="float" />
+          <Property Name="km2" Type="float" />
+        </EntityType>
+        <EntityContainer Name="dicungModelStoreContainer">
+          <EntitySet Name="booking" EntityType="Self.booking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="group_booking" EntityType="Self.group_booking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="journey " EntityType="Self.journey " Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dicungModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="booking">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="full_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="public_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="birth_day" Type="DateTime" Precision="0" />
+          <Property Name="sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="time_go" Type="Time" Precision="7" />
+          <Property Name="time_to" Type="Time" Precision="7" />
+          <Property Name="from_location" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
+          <Property Name="long_from" Type="Double" />
+          <Property Name="lat_from" Type="Double" />
+          <Property Name="to_location" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
+          <Property Name="long_to" Type="Double" />
+          <Property Name="lat_to" Type="Double" />
+          <Property Name="km1" Type="Double" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="type_vehicle" Type="String" MaxLength="151" FixedLength="false" Unicode="true" />
+          <Property Name="des" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="group_id" Type="Int32" />
+          <Property Name="group_name" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Byte" />
+          <Property Name="money" Type="Double" />
+          <Property Name="date_time" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="group_booking">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="journey_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="book_id" Type="Int64" />
+          <Property Name="name" Type="String" MaxLength="251" FixedLength="false" Unicode="true" />
+          <Property Name="from_location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="long_from" Type="Double" />
+          <Property Name="lat_from" Type="Double" />
+          <Property Name="to_location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="long_to" Type="Double" />
+          <Property Name="lat_to" Type="Double" />
+          <Property Name="type_jouney" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="type_vehicle" Type="String" MaxLength="151" FixedLength="false" Unicode="true" />
+          <Property Name="days_travel" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="date_travels" Type="DateTime" Precision="3" />
+          <Property Name="departure_time" Type="Time" Precision="7" />
+          <Property Name="return_journey" Type="Boolean" />
+          <Property Name="return_time" Type="Time" Precision="7" />
+          <Property Name="list_booking" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="number_people" Type="Int32" />
+          <Property Name="is_full" Type="Boolean" />
+          <Property Name="des" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="is_notify" Type="Boolean" />
+          <Property Name="km1" Type="Double" />
+          <Property Name="km2" Type="Double" />
+        </EntityType>
+        <EntityContainer Name="dicungDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bookings" EntityType="Self.booking" />
+          <EntitySet Name="group_booking" EntityType="Self.group_booking" />
+          <EntitySet Name="journey_" EntityType="Self.journey_" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dicungModelStoreContainer" CdmEntityContainer="dicungDbEntities">
+          <EntitySetMapping Name="bookings">
+            <EntityTypeMapping TypeName="dicungModel.booking">
+              <MappingFragment StoreEntitySet="booking">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="public_code" ColumnName="public_code" />
+                <ScalarProperty Name="birth_day" ColumnName="birth_day" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="time_go" ColumnName="time_go" />
+                <ScalarProperty Name="time_to" ColumnName="time_to" />
+                <ScalarProperty Name="from_location" ColumnName="from_location" />
+                <ScalarProperty Name="long_from" ColumnName="long_from" />
+                <ScalarProperty Name="lat_from" ColumnName="lat_from" />
+                <ScalarProperty Name="to_location" ColumnName="to_location" />
+                <ScalarProperty Name="long_to" ColumnName="long_to" />
+                <ScalarProperty Name="lat_to" ColumnName="lat_to" />
+                <ScalarProperty Name="km1" ColumnName="km1" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="type_vehicle" ColumnName="type_vehicle" />
+                <ScalarProperty Name="des" ColumnName="des" />
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="group_name" ColumnName="group_name" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="date_time" ColumnName="date_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="group_booking">
+            <EntityTypeMapping TypeName="dicungModel.group_booking">
+              <MappingFragment StoreEntitySet="group_booking">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="journey_">
+            <EntityTypeMapping TypeName="dicungModel.journey_">
+              <MappingFragment StoreEntitySet="journey ">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="book_id" ColumnName="book_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="from_location" ColumnName="from_location" />
+                <ScalarProperty Name="long_from" ColumnName="long_from" />
+                <ScalarProperty Name="lat_from" ColumnName="lat_from" />
+                <ScalarProperty Name="to_location" ColumnName="to_location" />
+                <ScalarProperty Name="long_to" ColumnName="long_to" />
+                <ScalarProperty Name="lat_to" ColumnName="lat_to" />
+                <ScalarProperty Name="type_jouney" ColumnName="type_jouney" />
+                <ScalarProperty Name="type_vehicle" ColumnName="type_vehicle" />
+                <ScalarProperty Name="days_travel" ColumnName="days_travel" />
+                <ScalarProperty Name="date_travels" ColumnName="date_travels" />
+                <ScalarProperty Name="departure_time" ColumnName="departure_time" />
+                <ScalarProperty Name="return_journey" ColumnName="return_journey" />
+                <ScalarProperty Name="return_time" ColumnName="return_time" />
+                <ScalarProperty Name="list_booking" ColumnName="list_booking" />
+                <ScalarProperty Name="number_people" ColumnName="number_people" />
+                <ScalarProperty Name="is_full" ColumnName="is_full" />
+                <ScalarProperty Name="des" ColumnName="des" />
+                <ScalarProperty Name="is_notify" ColumnName="is_notify" />
+                <ScalarProperty Name="km1" ColumnName="km1" />
+                <ScalarProperty Name="km2" ColumnName="km2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
