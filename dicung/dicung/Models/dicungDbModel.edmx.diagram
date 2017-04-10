@@ -7,7 +7,7 @@
       <Diagram DiagramId="d9bc9f27b7b7495d874cbb65eec0a66e" Name="Diagram1" ZoomLevel="98">
         <EntityTypeShape EntityType="dicungModel.booking" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dicungModel.group_booking" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dicungModel.journey_" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dicungModel.journey" Width="1.5" PointX="2.75" PointY="2.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dicungModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dicungModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="booking">
           <Key>
             <PropertyRef Name="id" />
@@ -42,7 +42,7 @@
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="250" />
         </EntityType>
-        <EntityType Name="journey ">
+        <EntityType Name="journeies">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -73,10 +73,9 @@
         <EntityContainer Name="dicungModelStoreContainer">
           <EntitySet Name="booking" EntityType="Self.booking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="group_booking" EntityType="Self.group_booking" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="journey " EntityType="Self.journey " Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="journeies" EntityType="Self.journeies" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dicungModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -117,7 +116,12 @@
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="journey_">
+        <EntityContainer Name="dicungDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bookings" EntityType="Self.booking" />
+          <EntitySet Name="group_booking" EntityType="Self.group_booking" />
+          <EntitySet Name="journeies" EntityType="dicungModel.journey" />
+        </EntityContainer>
+        <EntityType Name="journey">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -145,11 +149,6 @@
           <Property Name="km1" Type="Double" />
           <Property Name="km2" Type="Double" />
         </EntityType>
-        <EntityContainer Name="dicungDbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="bookings" EntityType="Self.booking" />
-          <EntitySet Name="group_booking" EntityType="Self.group_booking" />
-          <EntitySet Name="journey_" EntityType="Self.journey_" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -195,32 +194,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="journey_">
-            <EntityTypeMapping TypeName="dicungModel.journey_">
-              <MappingFragment StoreEntitySet="journey ">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="book_id" ColumnName="book_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="from_location" ColumnName="from_location" />
-                <ScalarProperty Name="long_from" ColumnName="long_from" />
-                <ScalarProperty Name="lat_from" ColumnName="lat_from" />
-                <ScalarProperty Name="to_location" ColumnName="to_location" />
-                <ScalarProperty Name="long_to" ColumnName="long_to" />
-                <ScalarProperty Name="lat_to" ColumnName="lat_to" />
-                <ScalarProperty Name="type_jouney" ColumnName="type_jouney" />
-                <ScalarProperty Name="type_vehicle" ColumnName="type_vehicle" />
-                <ScalarProperty Name="days_travel" ColumnName="days_travel" />
-                <ScalarProperty Name="date_travels" ColumnName="date_travels" />
-                <ScalarProperty Name="departure_time" ColumnName="departure_time" />
-                <ScalarProperty Name="return_journey" ColumnName="return_journey" />
-                <ScalarProperty Name="return_time" ColumnName="return_time" />
-                <ScalarProperty Name="list_booking" ColumnName="list_booking" />
-                <ScalarProperty Name="number_people" ColumnName="number_people" />
-                <ScalarProperty Name="is_full" ColumnName="is_full" />
-                <ScalarProperty Name="des" ColumnName="des" />
-                <ScalarProperty Name="is_notify" ColumnName="is_notify" />
-                <ScalarProperty Name="km1" ColumnName="km1" />
+          <EntitySetMapping Name="journeies">
+            <EntityTypeMapping TypeName="dicungModel.journey">
+              <MappingFragment StoreEntitySet="journeies">
                 <ScalarProperty Name="km2" ColumnName="km2" />
+                <ScalarProperty Name="km1" ColumnName="km1" />
+                <ScalarProperty Name="is_notify" ColumnName="is_notify" />
+                <ScalarProperty Name="des" ColumnName="des" />
+                <ScalarProperty Name="is_full" ColumnName="is_full" />
+                <ScalarProperty Name="number_people" ColumnName="number_people" />
+                <ScalarProperty Name="list_booking" ColumnName="list_booking" />
+                <ScalarProperty Name="return_time" ColumnName="return_time" />
+                <ScalarProperty Name="return_journey" ColumnName="return_journey" />
+                <ScalarProperty Name="departure_time" ColumnName="departure_time" />
+                <ScalarProperty Name="date_travels" ColumnName="date_travels" />
+                <ScalarProperty Name="days_travel" ColumnName="days_travel" />
+                <ScalarProperty Name="type_vehicle" ColumnName="type_vehicle" />
+                <ScalarProperty Name="type_jouney" ColumnName="type_jouney" />
+                <ScalarProperty Name="lat_to" ColumnName="lat_to" />
+                <ScalarProperty Name="long_to" ColumnName="long_to" />
+                <ScalarProperty Name="to_location" ColumnName="to_location" />
+                <ScalarProperty Name="lat_from" ColumnName="lat_from" />
+                <ScalarProperty Name="long_from" ColumnName="long_from" />
+                <ScalarProperty Name="from_location" ColumnName="from_location" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="book_id" ColumnName="book_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

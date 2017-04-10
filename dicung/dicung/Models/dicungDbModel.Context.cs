@@ -27,6 +27,6 @@ namespace dicung.Models
     
         public virtual DbSet<booking> bookings { get; set; }
         public virtual DbSet<group_booking> group_booking { get; set; }
-        public virtual DbSet<journey_> journey_ { get; set; }
+        public virtual DbSet<journey> journeies { get; set; }
     }
 }
