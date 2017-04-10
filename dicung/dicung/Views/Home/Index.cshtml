@@ -19,62 +19,381 @@
     ViewBag.image = "";
 }
 
-
-
+<link href="~/Content/parallax/clockpicker/css/materialize.clockpicker.css" rel="stylesheet" />
 
 <div class="section">
     <div class="row">
         <div class="col m4 l4">
-            <h5 class="center">Đặt xe</h5>
-            <div class="row">
-                <form class="col s12" method="get" id="form-booking" name="form-booking">
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-                            <label for="first_name">First Name</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="last_name" type="text" class="validate">
-                            <label for="last_name">Last Name</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-                            <label for="disabled">Disabled</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="password" type="password" class="validate">
-                            <label for="password">Password</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="email" type="email" class="validate">
-                            <label for="email">Email</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            This is an inline input field:
-                            <div class="input-field inline">
-                                <input id="email" type="email" class="validate">
-                                <label for="email" data-error="wrong" data-success="right">Email</label>
+            <div class="section_datxe deep-purple">
+
+                <div class="row">
+                    <form class="col s12" method="post" id="form-booking" name="form-booking">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" name="booking_long_from" id="booking_long_from" />
+                        <input type="hidden" name="booking_lat_from" id="booking_lat_from" />
+                        <input type="hidden" name="booking_long_to" id="booking_long_to" />
+                        <input type="hidden" name="booking_lat_to" id="booking_lat_to" />                       
+
+                        <div class="row">
+                            
+                            <div class="input-field col s12 m12">
+                                <input id="booking_from_location" type="text" class="validate" autocomplete="off">
+                                <label for="booking_from_location">Điểm đi</label>
+                            </div>
+                        </div>                                             
+
+                        <div class="row">
+                            <div class="input-field col s12 m12">
+                                <input id="booking_to_location" name="booking_to_location" type="text" class="validate" autocomplete="off">
+                                <label for="booking_to_location">Điểm đón</label>
                             </div>
                         </div>
-                    </div>
-                </form>
+
+                        <div class="row">
+                            <div class="input-field col s12 m12">
+                                <select name="booking_type_vehicle" id="booking_type_vehicle" onchange="CreateLine();">
+                                    <option value="" disabled selected>Chọn phương tiện</option>
+                                    <option value="DRIVING">Ô tô</option>
+                                    <option value="TRANSIT">Xe bus</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="booking_km1" placeholder="Khoảng cách" name="booking_km1" type="text" readonly class="validate">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <select name="booking_type" id="booking_type">
+                                    <option value="" disabled selected>Chọn Hình thức</option>
+                                    <option value="hocchung">Đi học chung</option>
+                                    <option value="lamchung">Đi làm chung</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="booking_time_go" name="booking_time_go" type="time" class="timepicker">
+                                <label for="booking_time_go">Giờ đón</label>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="booking_time_to" name="booking_time_to" type="time" class="timepicker">
+                                <label for="booking_time_to">Giờ về</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                <input id="booking_name" name="booking_name" type="text" class="validate">
+                                <label for="booking_name">Họ tên của bạn</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <input id="booking_email" name="booking_email" type="email" class="validate">
+                                <label for="booking_email">Email</label>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                <input id="booking_phone" name="booking_phone" type="text" class="validate">
+                                <label for="booking_phone">Số điện thoại</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <input id="booking_password" name="booking_password" type="password" class="validate">
+                                <label for="booking_password">Mật khẩu</label>
+                            </div>
+                        </div>
+                        
+
+                        <div class="row center">
+                            <div class="input-field col s12">
+                                <button id="btnreg" type="submit" class="waves-effect waves-light btn"><i class="fa fa-registered"></i> Đăng ký đi cùng</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
             </div>
         </div>
 
         <div class="col m8 l8">
             <div class="icon-block">
                 @*<h2 class="center brown-text"><i class="material-icons">group</i></h2>*@
-                <h5 class="center">Kết quả đặt xe</h5>
-                <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+                <h5 class="center">Thông tin quãng đường</h5>
+                <div class="row">
+                    <div id="map-canvas" class="col s12" style="height: 500px;">                        
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+<script src="~/Scripts/jquery.geocomplete.min.js"></script>
+<script src="~/Content/parallax/clockpicker/js/materialize.clockpicker.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            //code
+
+            var options = {
+                map: "#map-canvas"
+            };
+
+            $("#booking_from_location").geocomplete(options)
+              .bind("geocode:result", function (event, result) {
+                  $("#booking_long_from").val(result.geometry.location.lng());
+                  $("#booking_lat_from").val(result.geometry.location.lat());
+                  //alert("long" + result.geometry.location.lng() + ", lat=" + result.geometry.location.lat());
+              })
+              .bind("geocode:error", function (event, status) {
+                  $.log("ERROR: " + status);
+              })
+              .bind("geocode:multiple", function (event, results) {
+                  $.log("Multiple: " + results.length + " results found");
+              });
+
+
+            $("#booking_to_location").geocomplete(options)
+              .bind("geocode:result", function (event, result) {
+                  $("#booking_long_to").val(result.geometry.location.lng());
+                  $("#booking_lat_to").val(result.geometry.location.lat());
+              })
+              .bind("geocode:error", function (event, status) {
+                  $.log("ERROR: " + status);
+              })
+              .bind("geocode:multiple", function (event, results) {
+                  $.log("Multiple: " + results.length + " results found");
+              });
+
+            $('input,textarea').focus(function () {
+                $(this).data('placeholder', $(this).attr('placeholder'))
+                       .attr('placeholder', '');
+            }).blur(function () {
+                $(this).attr('placeholder', $(this).data('placeholder'));
+            });
+            
+            var optionpickatime = {
+                autoclose: false,
+                twelvehour: true,
+                donetext: 'Chọn',
+            };
+
+            $('#booking_time_go').pickatime(optionpickatime);
+            $('#booking_time_to').pickatime(optionpickatime);
+            
+            $('#form-booking').submit(function (e) {
+                e.preventDefault();                
+                //var formdata = new FormData(); //FormData object
+                
+                if (document.getElementById("booking_long_from").value == "" || document.getElementById("booking_lat_from").value == "" || document.getElementById("booking_from_location").value == "") {
+                    Materialize.toast('Vui lòng nhập vị trí đi!', 4000)
+                    document.getElementById("booking_from_location").focus();
+                    return false;
+                }
+
+                if (document.getElementById("booking_long_to").value == "" || document.getElementById("booking_lat_to").value == "" || document.getElementById("booking_to_location").value == "") {
+                    Materialize.toast('Vui lòng nhập vị trí đến!', 4000)
+                    document.getElementById("booking_to_location").focus();
+                    return false;
+                }
+
+                if ($("#booking_type_vehicle").val() === "") {
+                    Materialize.toast('Vui lòng chọn phương tiện đi!', 4000)
+                    document.getElementById("booking_type_vehicle").focus();
+                    return false;
+                }
+
+                if ($("#booking_type").val() === "") {
+                    Materialize.toast('Vui lòng chọn hình thức đi!', 4000)
+                    document.getElementById("booking_type").focus();
+                    return false;
+                }
+
+                if (document.getElementById("booking_time_go").value === "") {
+                    Materialize.toast('Vui lòng nhập giờ đón!', 4000)
+                    document.getElementById("booking_time_go").focus();
+                    return false;
+                }
+
+                if (document.getElementById("booking_time_to").value === "") {
+                    Materialize.toast('Vui lòng nhập giờ tới!', 4000)
+                    document.getElementById("booking_time_to").focus();
+                    return false;
+                }
+
+                if (document.getElementById("booking_name").value === "") {
+                    Materialize.toast('Vui lòng nhập họ tên!', 4000)
+                    document.getElementById("booking_name").focus();
+                    return false;
+                }
+
+                if (document.getElementById("booking_email").value === "") {
+                    Materialize.toast('Vui lòng nhập email!', 4000)
+                    document.getElementById("booking_email").focus();
+                    return false;
+                }
+
+                if (document.getElementById("booking_phone").value === "") {
+                    Materialize.toast('Vui lòng nhập số điện thoại!', 4000)
+                    document.getElementById("booking_phone").focus();
+                    return false;
+                }
+
+                if (document.getElementById("booking_password").value === "") {
+                    Materialize.toast('Vui lòng nhập mật khẩu!', 4000)
+                    document.getElementById("booking_password").focus();
+                    return false;
+                }
+
+                var $formdata = {
+                    full_name: document.getElementById("booking_name").value,
+                    phone: document.getElementById("booking_phone").value,
+                    email: document.getElementById("booking_email").value,
+                    pass: document.getElementById("booking_password").value,
+                    time_go: document.getElementById("booking_time_go").value,
+                    time_to: document.getElementById("booking_time_to").value,
+                    from_location: document.getElementById("booking_from_location").value,
+                    to_location: document.getElementById("booking_to_location").value,
+                    long_from: document.getElementById("booking_long_from").value,
+                    lat_from: document.getElementById("booking_lat_from").value,
+                    long_to: document.getElementById("booking_long_to").value,
+                    lat_to: document.getElementById("booking_lat_to").value,
+                    km1: document.getElementById("booking_km1").value,
+                    type: $("#booking_type").val(),
+                    type_vehicle: $("#booking_type_vehicle").val()
+                };
+
+                console.log($formdata);
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/booking',
+                    data: $formdata, // serializes the form's elements.
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data) {
+                            var msg = 'Cám ơn bạn đã đặt xe đi cùng, Chúng tôi sẽ gửi kết quả chuyến đi sau khi góp nhóm thành công qua email.';
+                            alert(msg);
+                        }
+                    },
+                    beforeSend: function () {
+                        $('#btnreg').html('<i class="fa fa-registered"></i> Đang đăng ký thông tin xin chờ....');
+                        $('#btnreg').disabled = true;
+                    },
+                    complete: function () {
+                        document.getElementById("btnreg").innerHTML = "";
+                        $('#btnreg').html('<i class="fa fa-registered"></i> Đăng ký đi cùng');
+                        $('#btnreg').disabled = false;
+                        document.getElementById("form-booking").reset();
+                    },
+                    error: function (error) {
+                        alert('Vui lòng kiểm tra lại kết nối internet, error: ' + error, 5000);
+                    }
+                });
+                                
+
+            })
+
+
+        })
+
+        function CreateLine() {
+            if (document.getElementById('booking_from_location').value === "") {
+                Materialize.toast('Vui lòng nhập vị trí đi!', 4000)
+                document.getElementById('booking_from_location').focus();
+                return false;
+            }
+            
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+            var directionsService = new google.maps.DirectionsService;
+            var latlng = new google.maps.LatLng(document.getElementById('booking_lat_from').value, document.getElementById('booking_long_from').value);
+            var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                zoom: 14,
+                center: latlng,
+                draggable: true,
+                scrollwheel: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                animation: google.maps.Animation.DROP,
+            });
+            directionsDisplay.setMap(map);
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+        }
+
+        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+            if (document.getElementById('booking_to_location').value === "") {
+                Materialize.toast('Vui lòng nhập vị trí tới!', 4000)
+                document.getElementById('booking_to_location').focus();
+                return false;
+            }
+            var selectedMode = "DRIVING";
+            if ($("#booking_type_vehicle").val() !== "") {
+                selectedMode = $("#booking_type_vehicle").val();
+            }
+            var latlng1 = new google.maps.LatLng(document.getElementById('booking_lat_from').value, document.getElementById('booking_long_from').value);
+            var latlng2 = new google.maps.LatLng(document.getElementById('booking_lat_to').value, document.getElementById('booking_long_to').value);
+            directionsService.route({
+                origin: latlng1,  // Diem di.
+                destination: latlng2,  // Diem den
+                // Note that Javascript allows us to access the constant
+                // using square brackets and a string value as its
+                // "property."
+                travelMode: google.maps.TravelMode[selectedMode]
+            }, function (response, status) {
+                if (status == 'OK') {
+                    directionsDisplay.setDirections(response);
+                    //var khoangcach = response.routes[0].legs[0].distance.text;
+                    var khoangcach = response.routes[0].legs[0].distance.text.replace(/km/g, "").replace(/m/g, "").replace(",", ".");
+                    document.getElementById('booking_km1').value = khoangcach;
+                } else {
+                    document.getElementById('booking_km1').value = 0;
+                }
+            });
+        }
+
+
+        @*function initmap() {           
+            var myVitri = new google.maps.LatLng(@Model.building.building_latlong);
+            var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                center: { lat: myVitri.lat(), lng: myVitri.lng() },
+                zoom: 14,
+                draggable: true,
+                scrollwheel: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                animation: google.maps.Animation.DROP,
+            });
+
+            document.getElementById("lon2").value = myVitri.lng();
+            document.getElementById("lat2").value = myVitri.lat();
+            document.getElementById("place_to").value = '@Html.Raw(Model.building.building_address)';
+            var infoWindow = new google.maps.InfoWindow({ map: map });
+            var pos = {
+                lat: myVitri.lat(),
+                lng: myVitri.lng()
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('<i class="fa fa-home fa-2x"></i> @Model.building.building_address');
+            map.setCenter(pos);
+            
+
+        }*@
+
+    </script>
+
+}
