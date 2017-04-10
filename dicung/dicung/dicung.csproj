@@ -39,6 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -51,6 +59,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -133,7 +143,31 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\booking.cs">
+      <DependentUpon>dicungDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dicungDbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dicungDbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dicungDbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dicungDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dicungDbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dicungDbModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\dicungViewModel.cs" />
+    <Compile Include="Models\group_booking.cs">
+      <DependentUpon>dicungDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\journey.cs">
+      <DependentUpon>dicungDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +360,23 @@
     <Content Include="Content\parallax\fonts\material-design-icons\Material-Design-Icons.eot" />
     <Content Include="Content\parallax\fonts\material-design-icons\Material-Design-Icons.ttf" />
     <Content Include="Content\parallax\fonts\material-design-icons\Material-Design-Icons.woff" />
+    <EntityDeploy Include="Models\dicungDbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dicungDbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\dicungDbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dicungDbModel.edmx</DependentUpon>
+      <LastGenOutput>dicungDbModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\dicungDbModel.edmx.diagram">
+      <DependentUpon>dicungDbModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\dicungDbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dicungDbModel.edmx</DependentUpon>
+      <LastGenOutput>dicungDbModel.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -365,6 +416,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
