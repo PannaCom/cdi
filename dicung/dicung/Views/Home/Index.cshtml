@@ -38,14 +38,14 @@
                         <div class="row">
 
                             <div class="input-field col s12 m12">
-                                <input id="booking_from_location" placeholder="Điểm đón" type="text" class="validate" onchange="CreateLine();">
+                                <input id="booking_from_location" placeholder="Điểm đón" type="text" class="validate">
                                 <label for="booking_from_location">Điểm đón</label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="input-field col s12 m12">
-                                <input id="booking_to_location" placeholder="Điểm trả" name="booking_to_location" type="text" class="validate" autocomplete="off" onchange="CreateLine();">
+                                <input id="booking_to_location" placeholder="Điểm trả" name="booking_to_location" type="text" class="validate">
                                 <label for="booking_to_location">Điểm trả</label>
                             </div>
                         </div>
@@ -146,6 +146,7 @@
               .bind("geocode:result", function (event, result) {
                   $("#booking_long_from").val(result.geometry.location.lng());
                   $("#booking_lat_from").val(result.geometry.location.lat());
+                  CreateLine();
                   //alert("long" + result.geometry.location.lng() + ", lat=" + result.geometry.location.lat());
               })
               .bind("geocode:error", function (event, status) {
@@ -160,6 +161,7 @@
               .bind("geocode:result", function (event, result) {
                   $("#booking_long_to").val(result.geometry.location.lng());
                   $("#booking_lat_to").val(result.geometry.location.lat());
+                  CreateLine();
               })
               .bind("geocode:error", function (event, status) {
                   $.log("ERROR: " + status);
@@ -183,6 +185,26 @@
 
             $('#booking_time_go').pickatime(optionpickatime);
             $('#booking_time_to').pickatime(optionpickatime);
+
+            $('#booking_email').change(function () {
+                if ($('#booking_email').val() !== "") {
+                    if (checkemail($('#booking_email').val())) {
+                        adderror('booking_email', 'Email đã tồn tại.');
+                    } else {
+                        removeerror('booking_email');
+                    }
+                }                
+            })
+
+            $('#booking_phone').change(function () {
+                if ($('#booking_phone').val() !== "") {
+                    if (checkphone($('#booking_phone').val())) {
+                        adderror('booking_phone', 'Số điện thoại đã tồn tại.');
+                    } else {
+                        removeerror('booking_phone');
+                    }
+                }
+            })
             
             $('#form-booking').submit(function (e) {
                 e.preventDefault();                
@@ -248,6 +270,19 @@
                     return false;
                 }
 
+                if (checkemail(document.getElementById("booking_email").value)) {
+                    Materialize.toast('Email đã tồn tại', 4000)
+                    document.getElementById("booking_email").focus();
+                    return false;
+                }
+
+                if (checkphone(document.getElementById("booking_phone").value)) {
+                    Materialize.toast('Số điện thoại đã tồn tại', 4000)
+                    document.getElementById("booking_phone").focus();
+                    return false;
+                }
+
+
                 var $formdata = {
                     full_name: document.getElementById("booking_name").value,
                     phone: document.getElementById("booking_phone").value,
@@ -276,8 +311,22 @@
                     dataType: 'json',
                     success: function (data) {
                         if (data) {
-                            var msg = 'Cám ơn bạn đã đặt xe đi cùng, Chúng tôi sẽ gửi kết quả chuyến đi sau khi góp nhóm thành công qua email.';
-                            alert(msg);
+                            if (data.success == "1") {
+                                var msg = 'Cám ơn bạn đã đặt xe đi cùng, Chúng tôi sẽ gửi kết quả chuyến đi sau khi góp nhóm thành công qua email.';
+                                alert(msg);
+                                document.getElementById("form-booking").reset();
+                            }
+                            if (data.success == "0") {
+                                
+                                $.each(data.msg, function (i, item) {
+                                    console.log(item);
+                                    $('label[for="' + item.field + '"]').attr('data-error', item.error);
+                                    $('#' + item.field).removeClass("valid");
+                                    $('#' + item.field).addClass("invalid");
+                                })
+                                
+                            }                            
+                            
                         }
                     },
                     beforeSend: function () {
@@ -285,10 +334,8 @@
                         $('#btnreg').disabled = true;
                     },
                     complete: function () {
-                        document.getElementById("btnreg").innerHTML = "";
                         $('#btnreg').html('<i class="fa fa-registered"></i> Đăng ký đi cùng');
-                        $('#btnreg').disabled = false;
-                        document.getElementById("form-booking").reset();
+                        $('#btnreg').disabled = false;                        
                     },
                     error: function (error) {
                         alert('Vui lòng kiểm tra lại kết nối internet, error: ' + error, 5000);
@@ -301,16 +348,23 @@
 
         })
 
+        
+
         function CreateLine() {
             if (document.getElementById('booking_from_location').value === "") {
                 Materialize.toast('Vui lòng nhập vị trí đi!', 4000)
                 document.getElementById('booking_from_location').focus();
                 return false;
             }
+            if (document.getElementById('booking_to_location').value === "") {
+                Materialize.toast('Vui lòng nhập vị trí tới!', 4000)
+                document.getElementById('booking_to_location').focus();
+                return false;
+            }            
             
+            var latlng = new google.maps.LatLng(document.getElementById('booking_lat_from').value, document.getElementById('booking_long_from').value);
             var directionsDisplay = new google.maps.DirectionsRenderer;
             var directionsService = new google.maps.DirectionsService;
-            var latlng = new google.maps.LatLng(document.getElementById('booking_lat_from').value, document.getElementById('booking_long_from').value);
             var map = new google.maps.Map(document.getElementById('map-canvas'), {
                 zoom: 14,
                 center: latlng,
@@ -325,11 +379,7 @@
         }
 
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-            if (document.getElementById('booking_to_location').value === "") {
-                Materialize.toast('Vui lòng nhập vị trí tới!', 4000)
-                document.getElementById('booking_to_location').focus();
-                return false;
-            }
+            
             var selectedMode = "DRIVING";
             //if ($("#booking_type_vehicle").val() !== "") {
             //    selectedMode = $("#booking_type_vehicle").val();
@@ -356,32 +406,48 @@
         }
 
 
-        @*function initmap() {           
-            var myVitri = new google.maps.LatLng(@Model.building.building_latlong);
-            var map = new google.maps.Map(document.getElementById('map-canvas'), {
-                center: { lat: myVitri.lat(), lng: myVitri.lng() },
-                zoom: 14,
-                draggable: true,
-                scrollwheel: false,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                animation: google.maps.Animation.DROP,
-            });
+        function checkemail(email) {
+            $.ajax({
+                url: '/Home/checkemailexist',
+                data: { email: email },
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                done: function (data) {
+                    if (data) {
+                        console.log(data);
+                        return data;
+                    }
+                }
+            })
+        }
 
-            document.getElementById("lon2").value = myVitri.lng();
-            document.getElementById("lat2").value = myVitri.lat();
-            document.getElementById("place_to").value = '@Html.Raw(Model.building.building_address)';
-            var infoWindow = new google.maps.InfoWindow({ map: map });
-            var pos = {
-                lat: myVitri.lat(),
-                lng: myVitri.lng()
-            };
+        function checkphone(phone) {
+            $.ajax({
+                url: '/Home/checkphoneexist',
+                data: { phone: phone },
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                done: function (data) {
+                    if (data) {
+                        console.log(data);
+                        return data;
+                    }
+                }
+            })
+        }
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('<i class="fa fa-home fa-2x"></i> @Model.building.building_address');
-            map.setCenter(pos);
-            
+        function adderror(selector, error) {
+            $('label[for="' + selector + '"]').attr('data-error', error);
+            $('#' + selector).removeClass("valid").addClass("invalid");
+        }
 
-        }*@
+        function removeerror(selector) {
+            $('label[for="' + selector + '"]').removeAttr('data-error');
+            $('#' + selector).removeClass("invalid").addClass("valid");
+        }
+        
 
     </script>
 
