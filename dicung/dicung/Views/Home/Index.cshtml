@@ -19,11 +19,11 @@
     ViewBag.image = "";
 }
 
-<link href="~/Content/materialize/clockpicker/css/materialize.clockpicker.css" rel="stylesheet" />
+<link href="~/Content/parallax/clockpicker/css/materialize.clockpicker.css" rel="stylesheet" />
 
 <div class="section">
     <div class="row">
-        <div class="col m4 l4">
+        <div class="col m4 s12">
 
              <div class="row">
                     <form class="col s12 cyan lighten-5" method="post" id="form-booking" name="form-booking">
@@ -38,14 +38,14 @@
                         <div class="row">
 
                             <div class="input-field col s12 m12">
-                                <input id="booking_from_location" placeholder="Điểm đón" type="text" class="validate">
+                                <input id="booking_from_location" placeholder="Nhập vị trí điểm đón" type="text" class="validate">
                                 <label for="booking_from_location">Điểm đón</label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="input-field col s12 m12">
-                                <input id="booking_to_location" placeholder="Điểm trả" name="booking_to_location" type="text" class="validate">
+                                <input id="booking_to_location" placeholder="Nhập vị trí điểm trả" name="booking_to_location" type="text" class="validate">
                                 <label for="booking_to_location">Điểm trả</label>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
 
                         <div class="row">
                             <div class="input-field col s12 m6">
-                                <input id="booking_time_go" name="booking_time_go" type="time" class="timepicker">
+                                <input id="booking_time_go" name="booking_time_go" type="time" class="timepicker" data-default="06:00:00">
                                 <label for="booking_time_go">Giờ đi</label>
                             </div>
                             <div class="input-field col s12 m6">
@@ -117,7 +117,7 @@
 
         </div>
 
-        <div class="col m8 l8">
+        <div class="col m8 s12">
             <div class="icon-block">
                 @*<h2 class="center brown-text"><i class="material-icons">group</i></h2>*@
                 <h5 class="center">Thông tin quãng đường</h5>
@@ -132,7 +132,7 @@
 
 @section Scripts {
 <script src="~/Scripts/jquery.geocomplete.min.js"></script>
-<script src="~/Content/materialize/clockpicker/js/materialize.clockpicker.js"></script>
+<script src="~/Content/parallax/clockpicker/js/materialize.clockpicker.js"></script>
     <script>
 
         $(document).ready(function () {
@@ -179,7 +179,7 @@
             
             var optionpickatime = {
                 autoclose: false,
-                twelvehour: true,
+                twelvehour: false,
                 donetext: 'Chọn',
             };
 
@@ -188,6 +188,7 @@
 
             $('#booking_email').change(function () {
                 if ($('#booking_email').val() !== "") {
+                    console.log(checkemail($('#booking_email').val()));
                     if (checkemail($('#booking_email').val())) {
                         adderror('booking_email', 'Email đã tồn tại.');
                     } else {
@@ -211,13 +212,17 @@
                 //var formdata = new FormData(); //FormData object
                 
                 if (document.getElementById("booking_long_from").value == "" || document.getElementById("booking_lat_from").value == "" || document.getElementById("booking_from_location").value == "") {
-                    Materialize.toast('Vui lòng nhập vị trí đi!', 4000)
+                    var msg = "Vui lòng nhập vị trí đi!";
+                    Materialize.toast(msg, 4000);
+                    adderror('booking_from_location', msg);
                     document.getElementById("booking_from_location").focus();
                     return false;
-                }
+                } 
 
                 if (document.getElementById("booking_long_to").value == "" || document.getElementById("booking_lat_to").value == "" || document.getElementById("booking_to_location").value == "") {
-                    Materialize.toast('Vui lòng nhập vị trí đến!', 4000)
+                    var msg = "Vui lòng nhập vị trí đến!";
+                    Materialize.toast(msg, 4000);
+                    adderror('booking_to_location', msg);
                     document.getElementById("booking_to_location").focus();
                     return false;
                 }
@@ -235,48 +240,60 @@
                 //}
 
                 if (document.getElementById("booking_time_go").value === "") {
-                    Materialize.toast('Vui lòng nhập giờ đón!', 4000)
+                    var msg = 'Vui lòng nhập giờ đón!';
+                    Materialize.toast(msg, 4000);
+                    adderror('booking_time_go', msg);
                     document.getElementById("booking_time_go").focus();
                     return false;
                 }
 
                 if (document.getElementById("booking_time_to").value === "") {
-                    Materialize.toast('Vui lòng nhập giờ tới!', 4000)
+                    var msg = 'Vui lòng nhập giờ tới!';
+                    Materialize.toast(msg, 4000);
+                    adderror('booking_time_to', msg);
                     document.getElementById("booking_time_to").focus();
                     return false;
                 }
 
                 if (document.getElementById("booking_name").value === "") {
-                    Materialize.toast('Vui lòng nhập họ tên!', 4000)
+                    var msg = 'Vui lòng nhập họ tên!';
+                    Materialize.toast(msg, 4000);
+                    adderror('booking_name', msg);
                     document.getElementById("booking_name").focus();
                     return false;
                 }
 
                 if (document.getElementById("booking_email").value === "") {
-                    Materialize.toast('Vui lòng nhập email!', 4000)
+                    var msg = 'Vui lòng nhập email!';
+                    Materialize.toast(msg, 4000);
+                    adderror('booking_email', msg);
                     document.getElementById("booking_email").focus();
                     return false;
                 }
 
                 if (document.getElementById("booking_phone").value === "") {
-                    Materialize.toast('Vui lòng nhập số điện thoại!', 4000)
+                    var msg = 'Vui lòng nhập số điện thoại!';
+                    Materialize.toast(msg, 4000);
+                    adderror('booking_phone', msg);
                     document.getElementById("booking_phone").focus();
                     return false;
                 }
 
                 if (document.getElementById("booking_password").value === "") {
-                    Materialize.toast('Vui lòng nhập mật khẩu!', 4000)
+                    var msg = 'Vui lòng nhập mật khẩu!';
+                    Materialize.toast(msg, 4000);
+                    adderror('booking_password', msg);
                     document.getElementById("booking_password").focus();
                     return false;
                 }
 
-                if (checkemail(document.getElementById("booking_email").value)) {
+                if (checkemail(document.getElementById("booking_email").value) === '1') {
                     Materialize.toast('Email đã tồn tại', 4000)
                     document.getElementById("booking_email").focus();
                     return false;
                 }
 
-                if (checkphone(document.getElementById("booking_phone").value)) {
+                if (checkphone(document.getElementById("booking_phone").value) === '1') {
                     Materialize.toast('Số điện thoại đã tồn tại', 4000)
                     document.getElementById("booking_phone").focus();
                     return false;
@@ -331,11 +348,12 @@
                     },
                     beforeSend: function () {
                         $('#btnreg').html('<i class="fa fa-registered"></i> Đang đăng ký thông tin xin chờ....');
-                        $('#btnreg').disabled = true;
+                        document.getElementById('btnreg').disabled = true;
+
                     },
                     complete: function () {
                         $('#btnreg').html('<i class="fa fa-registered"></i> Đăng ký đi cùng');
-                        $('#btnreg').disabled = false;                        
+                        document.getElementById('btnreg').disabled = false;
                     },
                     error: function (error) {
                         alert('Vui lòng kiểm tra lại kết nối internet, error: ' + error, 5000);

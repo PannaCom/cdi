@@ -34,10 +34,10 @@ namespace dicung.Controllers
         [HttpPost]
         public ActionResult checkemailexist(string email)
         {
-            bool exist = false;
+            int exist = 0;
             if (db.bookings.Any(x=>x.email == email))
             {
-                exist = true;
+                exist = 1;
             }
             return Json(exist, JsonRequestBehavior.AllowGet);
         }
@@ -45,16 +45,15 @@ namespace dicung.Controllers
         [HttpPost]
         public ActionResult checkphoneexist(string phone)
         {
-            bool exist = false;
+            int exist = 0;
             if (db.bookings.Any(x => x.phone == phone))
             {
-                exist = true;
+                exist = 1;
             }
             return Json(exist, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult booking(booking model)
         {
             var data = new resultJSON();
@@ -89,6 +88,23 @@ namespace dicung.Controllers
                 string passHash = Configs.GetMd5Hash(md5Hash, model.pass);
                 newbooking.pass = passHash;
                 newbooking.time_go = model.time_go ?? null;
+                newbooking.time_to = model.time_to ?? null;
+                newbooking.from_location = model.from_location ?? null;
+                newbooking.to_location = model.to_location ?? null;
+                newbooking.long_from = model.long_from ?? null;
+                newbooking.lat_from = model.lat_from ?? null;
+                newbooking.long_to = model.long_to ?? null;
+                newbooking.lat_to = model.lat_to ?? null;
+                newbooking.km1 = model.km1 ?? null;
+                newbooking.type = model.type ?? null;
+                newbooking.type_vehicle = model.type_vehicle ?? null;
+                newbooking.status = 0;
+                newbooking.date_time = DateTime.Now;
+                db.bookings.Add(newbooking);
+                db.SaveChanges();
+                data.success = "1";
+                data.msb = null;
+
             }            
 
 
