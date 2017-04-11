@@ -19,7 +19,7 @@
     ViewBag.image = "";
 }
 
-<link href="~/Content/parallax/clockpicker/css/materialize.clockpicker.css" rel="stylesheet" />
+<link href="~/Content/materialize/clockpicker/css/materialize.clockpicker.css" rel="stylesheet" />
 
 <div class="section">
     <div class="row">
@@ -132,7 +132,7 @@
 
 @section Scripts {
 <script src="~/Scripts/jquery.geocomplete.min.js"></script>
-<script src="~/Content/parallax/clockpicker/js/materialize.clockpicker.js"></script>
+<script src="~/Content/materialize/clockpicker/js/materialize.clockpicker.js"></script>
     <script>
 
         $(document).ready(function () {
@@ -406,47 +406,7 @@
         }
 
 
-        function checkemail(email) {
-            $.ajax({
-                url: '/Home/checkemailexist',
-                data: { email: email },
-                type: 'POST',
-                dataType: 'json',
-                cache: false,
-                done: function (data) {
-                    if (data) {
-                        console.log(data);
-                        return data;
-                    }
-                }
-            })
-        }
-
-        function checkphone(phone) {
-            $.ajax({
-                url: '/Home/checkphoneexist',
-                data: { phone: phone },
-                type: 'POST',
-                dataType: 'json',
-                cache: false,
-                done: function (data) {
-                    if (data) {
-                        console.log(data);
-                        return data;
-                    }
-                }
-            })
-        }
-
-        function adderror(selector, error) {
-            $('label[for="' + selector + '"]').attr('data-error', error);
-            $('#' + selector).removeClass("valid").addClass("invalid");
-        }
-
-        function removeerror(selector) {
-            $('label[for="' + selector + '"]').removeAttr('data-error');
-            $('#' + selector).removeClass("invalid").addClass("valid");
-        }
+        
         
 
     </script>
