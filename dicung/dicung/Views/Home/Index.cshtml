@@ -26,93 +26,93 @@
         <div class="col m4 s12">
 
              <div class="row">
-                    <form class="col s12 cyan lighten-5" method="post" id="form-booking" name="form-booking">
-                        @*<h2>Đi làm chung</h2>*@
-                        @Html.AntiForgeryToken()
+                 <form class="col s12 cyan lighten-5" method="post" id="form-booking" name="form-booking">
+                     @*<h2>Đi làm chung</h2>*@
+                     @Html.AntiForgeryToken()
 
-                        <input type="hidden" name="booking_long_from" id="booking_long_from" />
-                        <input type="hidden" name="booking_lat_from" id="booking_lat_from" />
-                        <input type="hidden" name="booking_long_to" id="booking_long_to" />
-                        <input type="hidden" name="booking_lat_to" id="booking_lat_to" />
-                        <input id="booking_km1" name="booking_km1" type="hidden" readonly>
-                        <div class="row">
+                     <input type="hidden" name="booking_long_from" id="booking_long_from" />
+                     <input type="hidden" name="booking_lat_from" id="booking_lat_from" />
+                     <input type="hidden" name="booking_long_to" id="booking_long_to" />
+                     <input type="hidden" name="booking_lat_to" id="booking_lat_to" />
+                     <input id="booking_km1" name="booking_km1" type="hidden" readonly>
+                     <div class="row">
 
-                            <div class="input-field col s12 m12">
-                                <input id="booking_from_location" placeholder="Nhập vị trí điểm đón" type="text" class="validate">
-                                <label for="booking_from_location">Điểm đón</label>
-                            </div>
-                        </div>
+                         <div class="input-field col s12 m12">
+                             <input id="booking_from_location" placeholder="Nhập vị trí điểm đón" type="text" class="validate">
+                             <label for="booking_from_location">Điểm đón</label>
+                         </div>
+                     </div>
 
-                        <div class="row">
-                            <div class="input-field col s12 m12">
-                                <input id="booking_to_location" placeholder="Nhập vị trí điểm trả" name="booking_to_location" type="text" class="validate">
-                                <label for="booking_to_location">Điểm trả</label>
-                            </div>
-                        </div>
+                     <div class="row">
+                         <div class="input-field col s12 m12">
+                             <input id="booking_to_location" placeholder="Nhập vị trí điểm trả" name="booking_to_location" type="text" class="validate">
+                             <label for="booking_to_location">Điểm trả</label>
+                         </div>
+                     </div>
 
-                        @*<div class="row">
-                            <div class="input-field col s12 m12">
-                                <select name="booking_type_vehicle" id="booking_type_vehicle" onchange="CreateLine();">
-                                    <option value="" disabled selected>Chọn phương tiện</option>
-                                    <option value="DRIVING">Ô tô</option>
-                                    <option value="TRANSIT">Xe bus</option>
-                                </select>
-                            </div>
-                        </div>*@                        
+                     @*<div class="row">
+                <div class="input-field col s12 m12">
+                    <select name="booking_type_vehicle" id="booking_type_vehicle" onchange="CreateLine();">
+                        <option value="" disabled selected>Chọn phương tiện</option>
+                        <option value="DRIVING">Ô tô</option>
+                        <option value="TRANSIT">Xe bus</option>
+                    </select>
+                </div>
+            </div>*@
 
-                        @*<div class="row">
-                            <div class="input-field col s12">
-                                <select name="booking_type" id="booking_type">
-                                    <option value="" disabled selected>Chọn Hình thức</option>
-                                    <option value="hocchung">Đi học chung</option>
-                                    <option value="lamchung">Đi làm chung</option>
-                                </select>
-                            </div>
-                        </div>*@
+                     @*<div class="row">
+                <div class="input-field col s12">
+                    <select name="booking_type" id="booking_type">
+                        <option value="" disabled selected>Chọn Hình thức</option>
+                        <option value="hocchung">Đi học chung</option>
+                        <option value="lamchung">Đi làm chung</option>
+                    </select>
+                </div>
+            </div>*@
 
-                        <div class="row">
-                            <div class="input-field col s12 m6">
-                                <input id="booking_time_go" name="booking_time_go" type="time" class="timepicker" data-default="06:00:00">
-                                <label for="booking_time_go">Giờ đi</label>
-                            </div>
-                            <div class="input-field col s12 m6">
-                                <input id="booking_time_to" name="booking_time_to" type="time" class="timepicker">
-                                <label for="booking_time_to">Giờ về</label>
-                            </div>
-                        </div>
+                     <div class="row">
+                         <div class="input-field col s12 m6">
+                             <input id="booking_time_go" name="booking_time_go" type="time" class="timepicker">
+                             <label for="booking_time_go">Giờ đi</label>
+                         </div>
+                         <div class="input-field col s12 m6">
+                             <input id="booking_time_to" name="booking_time_to" type="time" class="timepicker">
+                             <label for="booking_time_to">Giờ về</label>
+                         </div>
+                     </div>
 
-                        <div class="row">
-                            <div class="input-field col s12 m6">
-                                <input id="booking_name" name="booking_name" type="text" class="validate">
-                                <label for="booking_name">Họ tên của bạn</label>
-                            </div>
-                            <div class="input-field col s12 m6">
-                                <input id="booking_email" name="booking_email" type="email" class="validate">
-                                <label for="booking_email">Email</label>
-                            </div>
+                     <div class="row">
+                         <div class="input-field col s12 m6">
+                             <input id="booking_name" name="booking_name" type="text" class="validate">
+                             <label for="booking_name">Họ tên của bạn</label>
+                         </div>
+                         <div class="input-field col s12 m6">
+                             <input id="booking_email" name="booking_email" type="email" class="validate">
+                             <label for="booking_email">Email</label>
+                         </div>
 
-                        </div>
+                     </div>
 
-                        <div class="row">
-                            <div class="input-field col s12 m6">
-                                <input id="booking_phone" name="booking_phone" type="text" class="validate">
-                                <label for="booking_phone">Số điện thoại</label>
-                            </div>
-                            <div class="input-field col s12 m6">
-                                <input id="booking_password" name="booking_password" type="password" class="validate">
-                                <label for="booking_password">Mật khẩu</label>
-                            </div>
-                        </div>
-
-
-                        <div class="row center">
-                            <div class="input-field col s12">
-                                <button id="btnreg" type="submit" class="waves-effect waves-light btn"><i class="fa fa-registered"></i> Đăng ký đi cùng</button>
-                            </div>
-                        </div>
+                     <div class="row">
+                         <div class="input-field col s12 m6">
+                             <input id="booking_phone" name="booking_phone" type="text" class="validate">
+                             <label for="booking_phone">Số điện thoại</label>
+                         </div>
+                         <div class="input-field col s12 m6">
+                             <input id="booking_password" name="booking_password" type="password" class="validate">
+                             <label for="booking_password">Mật khẩu</label>
+                         </div>
+                     </div>
 
 
-                    </form>
+                     <div class="row center">
+                         <div class="input-field col s12">
+                             <button id="btnreg" type="submit" class="waves-effect waves-light btn"><i class="fa fa-registered"></i> Đăng ký đi cùng</button>
+                         </div>
+                     </div>
+
+
+                 </form>
                 </div>
 
         </div>
@@ -120,7 +120,7 @@
         <div class="col m8 s12">
             <div class="icon-block">
                 @*<h2 class="center brown-text"><i class="material-icons">group</i></h2>*@
-                <h5 class="center">Thông tin quãng đường</h5>
+                <h5 class="center" id="title_page">Thông tin quãng đường</h5>
                 <div class="row">
                     <div id="map-canvas" class="col s12" style="height: 500px;">                        
                     </div>
@@ -178,32 +178,30 @@
             });
             
             var optionpickatime = {
+                
+            };
+            $('#booking_time_go').pickatime({
                 autoclose: false,
                 twelvehour: false,
                 donetext: 'Chọn',
-            };
+                default: '06:00:00'
+            });
+            $('#booking_time_to').pickatime({
+                autoclose: false,
+                twelvehour: false,
+                donetext: 'Chọn',
+                default: '17:00:00'
+            });
 
-            $('#booking_time_go').pickatime(optionpickatime);
-            $('#booking_time_to').pickatime(optionpickatime);
-
-            $('#booking_email').change(function () {
+            $('#booking_email').on('blur',function () {
                 if ($('#booking_email').val() !== "") {
-                    console.log(checkemail($('#booking_email').val()));
-                    if (checkemail($('#booking_email').val())) {
-                        adderror('booking_email', 'Email đã tồn tại.');
-                    } else {
-                        removeerror('booking_email');
-                    }
+                    checkemail($('#booking_email').val()) ? adderror('booking_email', 'Email đã tồn tại!') : removeerror('booking_email');
                 }                
             })
 
-            $('#booking_phone').change(function () {
+            $('#booking_phone').on('blur', function () {
                 if ($('#booking_phone').val() !== "") {
-                    if (checkphone($('#booking_phone').val())) {
-                        adderror('booking_phone', 'Số điện thoại đã tồn tại.');
-                    } else {
-                        removeerror('booking_phone');
-                    }
+                    checkphone($('#booking_phone').val()) ? adderror('booking_phone', 'Số điện thoại đã tồn tại!') : removeerror('booking_phone');
                 }
             })
             
@@ -248,7 +246,7 @@
                 }
 
                 if (document.getElementById("booking_time_to").value === "") {
-                    var msg = 'Vui lòng nhập giờ tới!';
+                    var msg = 'Vui lòng nhập giờ về!';
                     Materialize.toast(msg, 4000);
                     adderror('booking_time_to', msg);
                     document.getElementById("booking_time_to").focus();
@@ -279,6 +277,22 @@
                     return false;
                 }
 
+                if (checkemail(document.getElementById("booking_email").value)) {
+                    var msg = 'Email đã tồn tại!';
+                    Materialize.toast(msg, 4000);
+                    adderror('booking_email', msg);
+                    document.getElementById("booking_email").focus();
+                    return false;
+                }
+
+                if (checkphone(document.getElementById("booking_phone").value)) {
+                    var msg = 'Số điện thoại đã tồn tại!';
+                    Materialize.toast(msg, 4000);
+                    adderror('booking_phone', msg);
+                    document.getElementById("booking_phone").focus();
+                    return false;
+                }
+
                 if (document.getElementById("booking_password").value === "") {
                     var msg = 'Vui lòng nhập mật khẩu!';
                     Materialize.toast(msg, 4000);
@@ -286,19 +300,6 @@
                     document.getElementById("booking_password").focus();
                     return false;
                 }
-
-                if (checkemail(document.getElementById("booking_email").value) === '1') {
-                    Materialize.toast('Email đã tồn tại', 4000)
-                    document.getElementById("booking_email").focus();
-                    return false;
-                }
-
-                if (checkphone(document.getElementById("booking_phone").value) === '1') {
-                    Materialize.toast('Số điện thoại đã tồn tại', 4000)
-                    document.getElementById("booking_phone").focus();
-                    return false;
-                }
-
 
                 var $formdata = {
                     full_name: document.getElementById("booking_name").value,
@@ -318,7 +319,7 @@
                     type_vehicle: 'DRIVING'
                 };
 
-                console.log($formdata);
+                //console.log($formdata);
 
                 $.ajax({
                     type: "POST",
@@ -417,6 +418,7 @@
                     //var khoangcach = response.routes[0].legs[0].distance.text;
                     var khoangcach = response.routes[0].legs[0].distance.text.replace(/km/g, "").replace(/m/g, "").replace(",", ".");
                     document.getElementById('booking_km1').value = khoangcach;
+                    $('#title_page').append(' Khoảng cách: ' + khoangcach + ' km.');
                 } else {
                     document.getElementById('booking_km1').value = 0;
                 }

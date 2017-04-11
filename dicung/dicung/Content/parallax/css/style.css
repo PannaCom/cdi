@@ -61,23 +61,23 @@ footer.page-footer {
      color: #000;
    }
    /* label focus color */
-   .input-field input[type=text]:focus + label {
+   .input-field input:focus + label  {
      color: #000;
    }
    /* label underline focus color */
-   .input-field input[type=text]:focus {
+   .input-field input:focus {
      border-bottom: 1px solid #000;
      box-shadow: 0 1px 0 0 #000;
    }
    /* valid color */
-   .input-field input[type=text].valid {
+   .input-field input.valid {
      border-bottom: 1px solid #000;
      box-shadow: 0 1px 0 0 #000;
    }
    /* invalid color */
-   .input-field input[type=text].invalid {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
+   .input-field input.invalid {
+     border-bottom: 1px solid #f00;
+     box-shadow: 0 1px 0 0 #f00;
    }
    /* icon prefix focus color */
    .input-field .prefix.active {

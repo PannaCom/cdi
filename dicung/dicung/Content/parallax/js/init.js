@@ -11,35 +11,37 @@
   }); // end of document ready
 })(jQuery); // end of jQuery name space
 
+//function myCallback(result) {
+//    // Code that depends on 'result'
+//}
 
-function checkemail(email) {
-    $.ajax({
+//foo(myCallback);
+
+function checkemail(email) {       
+    var jqXHR = $.ajax({
         url: '/Home/checkemailexist',
         data: { email: email },
         type: 'POST',
         dataType: 'json',
         cache: false,
-        success: function (data) {
-            checking(data);
-        }
+        async: false
     })
+    return checking(jqXHR.responseText);
 }
 
 function checkphone(phone) {
-    $.ajax({
+    var jqXHR = $.ajax({
         url: '/Home/checkphoneexist',
         data: { phone: phone },
         type: 'POST',
         dataType: 'json',
         cache: false,
-        success: function (data) {
-            checking(data);
-        }
+        async: false
     })
+    return checking(jqXHR.responseText);
 }
 
 function checking(x) {
-    console.log(x);
     if (x === '1') {
         return true;
     } else if(x === '0') {
@@ -49,12 +51,10 @@ function checking(x) {
 
 function adderror(selector, error) {
     $('label[for="' + selector + '"]').attr('data-error', error);
-    $('#' + selector).removeClass("valid").addClass("invalid");
-    $('#' + selector).addClass("invalid");
+    $('#' + selector).addClass("invalid").removeClass("valid");
 }
 
 function removeerror(selector) {
     $('label[for="' + selector + '"]').removeAttr('data-error');
-    $('#' + selector).removeClass("invalid");
-    $('#' + selector).addClass("valid");
+    $('#' + selector).addClass("valid").removeClass("invalid");
 }
