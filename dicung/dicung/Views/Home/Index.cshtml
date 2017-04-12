@@ -208,7 +208,8 @@
             $('#form-booking').submit(function (e) {
                 e.preventDefault();                
                 //var formdata = new FormData(); //FormData object
-                
+                console.log(document.getElementById("booking_time_to").value - document.getElementById("booking_time_go").value);
+
                 if (document.getElementById("booking_long_from").value == "" || document.getElementById("booking_lat_from").value == "" || document.getElementById("booking_from_location").value == "") {
                     var msg = "Vui lòng nhập vị trí đi!";
                     Materialize.toast(msg, 4000);
@@ -254,7 +255,13 @@
                 }
 
                 // check giờ về - giờ đi >= 1
-
+                if (document.getElementById("booking_time_to").value < document.getElementById("booking_time_go").value) {
+                    var msg = 'Giờ về phải lớn hơn giờ đi!';
+                    Materialize.toast(msg, 4000);
+                    adderror('booking_time_to', msg);
+                    document.getElementById("booking_time_to").focus();
+                    return false;
+                }
 
                 if (document.getElementById("booking_name").value === "") {
                     var msg = 'Vui lòng nhập họ tên!';
