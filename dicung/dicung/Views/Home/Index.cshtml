@@ -208,7 +208,7 @@
             $('#form-booking').submit(function (e) {
                 e.preventDefault();                
                 //var formdata = new FormData(); //FormData object
-                console.log(document.getElementById("booking_time_to").value - document.getElementById("booking_time_go").value);
+                console.log(timediff(document.getElementById("booking_time_go").value, document.getElementById("booking_time_to").value));
 
                 if (document.getElementById("booking_long_from").value == "" || document.getElementById("booking_lat_from").value == "" || document.getElementById("booking_from_location").value == "") {
                     var msg = "Vui lòng nhập vị trí đi!";
@@ -255,8 +255,8 @@
                 }
 
                 // check giờ về - giờ đi >= 1
-                if (document.getElementById("booking_time_to").value < document.getElementById("booking_time_go").value) {
-                    var msg = 'Giờ về phải lớn hơn giờ đi!';
+                if (timediff(document.getElementById("booking_time_go").value, document.getElementById("booking_time_to").value) < 1) {
+                    var msg = 'Giờ về phải lớn hơn giờ đi ít nhất 1 giờ!';
                     Materialize.toast(msg, 4000);
                     adderror('booking_time_to', msg);
                     document.getElementById("booking_time_to").focus();
@@ -435,7 +435,13 @@
             });
         }
 
-
+        function timediff(startTime, endTime) {
+            //var startTime = "05:01:20";
+            //var endTime = "09:00:00";
+            //var regExp = /(\d{1,2})\:(\d{1,2})\:(\d{1,2})/;
+            var regExp = /(\d{1,2})\:(\d{1,2})\//;
+            return parseInt(endTime.replace(regExp, "$1$2")) - parseInt(startTime.replace(regExp, "$1$2"));
+        }
         
         
 
