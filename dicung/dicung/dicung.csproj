@@ -389,6 +389,7 @@
       <DependentUpon>dicungDbModel.edmx</DependentUpon>
       <LastGenOutput>dicungDbModel.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\dicung.net.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Content\parallax\pickadate\legacy.js" />
     <Content Include="Content\parallax\pickadate\picker.date.js" />

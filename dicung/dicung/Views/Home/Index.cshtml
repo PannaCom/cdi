@@ -131,6 +131,8 @@
 </div>
 
 @section Scripts {
+
+
 <script src="~/Scripts/jquery.geocomplete.min.js"></script>
 <script src="~/Content/parallax/clockpicker/js/materialize.clockpicker.js"></script>
     <script>
@@ -138,11 +140,45 @@
         $(document).ready(function () {
             //code
 
-            var options = {
-                map: "#map-canvas"
+            //var options = {
+            //    map: "#map-canvas",
+            //    mapOptions: {
+            //        zoom: 10
+            //    },
+            //    markerOptions: {
+            //        draggable: true
+            //    },
+
+            //};
+
+            var defaults = {
+                bounds: true,
+                country: null,
+                map: "#map-canvas",
+                details: false,
+                detailsAttribute: "name",
+                detailsScope: null,
+                autoselect: true,
+                location: false,
+
+                mapOptions: {
+                    zoom: 14,
+                    scrollwheel: false,
+                    mapTypeId: "roadmap"
+                },
+
+                markerOptions: {
+                    draggable: false
+                },
+
+                maxZoom: 16,
+                types: [],
+                blur: false,
+                geocodeAfterResult: false,
+                restoreValueAfterBlur: false
             };
 
-            $("#booking_from_location").geocomplete(options)
+            $("#booking_from_location").geocomplete(defaults)
               .bind("geocode:result", function (event, result) {
                   $("#booking_long_from").val(result.geometry.location.lng());
                   $("#booking_lat_from").val(result.geometry.location.lat());
@@ -157,7 +193,7 @@
               });
 
 
-            $("#booking_to_location").geocomplete(options)
+            $("#booking_to_location").geocomplete(defaults)
               .bind("geocode:result", function (event, result) {
                   $("#booking_long_to").val(result.geometry.location.lng());
                   $("#booking_lat_to").val(result.geometry.location.lat());
@@ -437,8 +473,8 @@
 
         
         
-        
 
     </script>
+
 
 }
