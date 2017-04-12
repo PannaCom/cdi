@@ -208,7 +208,7 @@
             $('#form-booking').submit(function (e) {
                 e.preventDefault();                
                 //var formdata = new FormData(); //FormData object
-                console.log(timediff(document.getElementById("booking_time_go").value, document.getElementById("booking_time_to").value));
+                //console.log(timediff(document.getElementById("booking_time_go").value, document.getElementById("booking_time_to").value));
 
                 if (document.getElementById("booking_long_from").value == "" || document.getElementById("booking_lat_from").value == "" || document.getElementById("booking_from_location").value == "") {
                     var msg = "Vui lòng nhập vị trí đi!";
@@ -435,13 +435,7 @@
             });
         }
 
-        function timediff(startTime, endTime) {
-            //var startTime = "05:01:20";
-            //var endTime = "09:00:00";
-            //var regExp = /(\d{1,2})\:(\d{1,2})\:(\d{1,2})/;
-            var regExp = /(\d{1,2})\:(\d{1,2})\//;
-            return parseInt(endTime.replace(regExp, "$1$2")) - parseInt(startTime.replace(regExp, "$1$2"));
-        }
+        
         
         
 

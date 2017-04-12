@@ -58,3 +58,11 @@ function removeerror(selector) {
     $('label[for="' + selector + '"]').removeAttr('data-error');
     $('#' + selector).addClass("valid").removeClass("invalid");
 }
+
+function timediff(startTime, endTime) {
+    //var startTime = "05:01:20";
+    //var endTime = "09:00:00";
+    //var regExp = /(\d{1,2})\:(\d{1,2})\:(\d{1,2})/;
+    var regExp = /(\d{1,2})\:(\d{1,2})\//;
+    return parseInt(endTime.replace(regExp, "$1$2")) - parseInt(startTime.replace(regExp, "$1$2"));
+}
