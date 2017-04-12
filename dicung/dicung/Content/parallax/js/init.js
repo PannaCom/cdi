@@ -66,3 +66,10 @@ function timediff(startTime, endTime) {
     var regExp = /(\d{1,2})\:(\d{1,2})\//;
     return parseInt(endTime.replace(regExp, "$1$2")) - parseInt(startTime.replace(regExp, "$1$2"));
 }
+
+function timediff3(startTime, endTime) {
+    //var startTime = "05:01:20";
+    //var endTime = "09:00:00";
+    var regExp = /(\d{1,2})\:(\d{1,2})\:(\d{1,2})/;
+    return parseInt(endTime.replace(regExp, "$1$2$3")) - parseInt(startTime.replace(regExp, "$1$2$3"));
+}
