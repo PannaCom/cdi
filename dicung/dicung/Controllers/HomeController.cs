@@ -61,23 +61,23 @@ namespace dicung.Controllers
             if (model != null)
             {
                 // checkemail
-                if (db.bookings.Any(x=>x.email == model.email))
-                {
-                    data.success = "0";
-                    data.msb.Add(new MsbList() { field = "booking_email", error = "Email đã được sử dụng." });
+                //if (db.bookings.Any(x=>x.email == model.email))
+                //{
+                //    data.success = "0";
+                //    data.msb.Add(new MsbList() { field = "booking_email", error = "Email đã được sử dụng." });
                     
-                }
+                //}
                 // check phone
-                if (db.bookings.Any(x => x.phone == model.phone))
-                {
-                    data.success = "0";
-                    data.msb.Add(new MsbList() { field = "booking_phone", error = "Số điện thoại đã được sử dụng." });
-                }
+                //if (db.bookings.Any(x => x.phone == model.phone))
+                //{
+                //    data.success = "0";
+                //    data.msb.Add(new MsbList() { field = "booking_phone", error = "Số điện thoại đã được sử dụng." });
+                //}
 
-                if (data.success == "0")
-	            {
-		            return Json(data, JsonRequestBehavior.AllowGet);
-	            }
+                //if (data.success == "0")
+                //{
+                //    return Json(data, JsonRequestBehavior.AllowGet);
+                //}
 
                 // add data
                 booking newbooking = new booking();

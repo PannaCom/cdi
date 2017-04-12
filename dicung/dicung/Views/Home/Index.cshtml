@@ -193,17 +193,17 @@
                 default: '17:00:00'
             });
 
-            $('#booking_email').on('blur',function () {
-                if ($('#booking_email').val() !== "") {
-                    checkemail($('#booking_email').val()) ? adderror('booking_email', 'Email đã tồn tại!') : removeerror('booking_email');
-                }                
-            })
+            //$('#booking_email').on('blur',function () {
+            //    if ($('#booking_email').val() !== "") {
+            //        checkemail($('#booking_email').val()) ? adderror('booking_email', 'Email đã tồn tại!') : removeerror('booking_email');
+            //    }                
+            //})
 
-            $('#booking_phone').on('blur', function () {
-                if ($('#booking_phone').val() !== "") {
-                    checkphone($('#booking_phone').val()) ? adderror('booking_phone', 'Số điện thoại đã tồn tại!') : removeerror('booking_phone');
-                }
-            })
+            //$('#booking_phone').on('blur', function () {
+            //    if ($('#booking_phone').val() !== "") {
+            //        checkphone($('#booking_phone').val()) ? adderror('booking_phone', 'Số điện thoại đã tồn tại!') : removeerror('booking_phone');
+            //    }
+            //})
             
             $('#form-booking').submit(function (e) {
                 e.preventDefault();                
@@ -277,21 +277,21 @@
                     return false;
                 }
 
-                if (checkemail(document.getElementById("booking_email").value)) {
-                    var msg = 'Email đã tồn tại!';
-                    Materialize.toast(msg, 4000);
-                    adderror('booking_email', msg);
-                    document.getElementById("booking_email").focus();
-                    return false;
-                }
+                //if (checkemail(document.getElementById("booking_email").value)) {
+                //    var msg = 'Email đã tồn tại!';
+                //    Materialize.toast(msg, 4000);
+                //    adderror('booking_email', msg);
+                //    document.getElementById("booking_email").focus();
+                //    return false;
+                //}
 
-                if (checkphone(document.getElementById("booking_phone").value)) {
-                    var msg = 'Số điện thoại đã tồn tại!';
-                    Materialize.toast(msg, 4000);
-                    adderror('booking_phone', msg);
-                    document.getElementById("booking_phone").focus();
-                    return false;
-                }
+                //if (checkphone(document.getElementById("booking_phone").value)) {
+                //    var msg = 'Số điện thoại đã tồn tại!';
+                //    Materialize.toast(msg, 4000);
+                //    adderror('booking_phone', msg);
+                //    document.getElementById("booking_phone").focus();
+                //    return false;
+                //}
 
                 if (document.getElementById("booking_password").value === "") {
                     var msg = 'Vui lòng nhập mật khẩu!';
