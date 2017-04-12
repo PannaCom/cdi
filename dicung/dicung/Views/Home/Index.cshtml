@@ -428,7 +428,7 @@
                     //var khoangcach = response.routes[0].legs[0].distance.text;
                     var khoangcach = response.routes[0].legs[0].distance.text.replace(/km/g, "").replace(/m/g, "").replace(",", ".");
                     document.getElementById('booking_km1').value = khoangcach;
-                    $('#title_page').append(' Khoảng cách: ' + khoangcach + ' km.');
+                    $('#title_page').empty().html('Thông tin quãng đường, khoảng cách khoảng: ' + khoangcach + ' km.');
                 } else {
                     document.getElementById('booking_km1').value = 0;
                 }
