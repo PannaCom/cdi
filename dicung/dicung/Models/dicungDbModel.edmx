@@ -43,6 +43,45 @@
           <Property Name="c_key" Type="nvarchar" MaxLength="50" />
           <Property Name="value" Type="int" />
         </EntityType>
+        <EntityType Name="countries">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quanhuyen" Type="nvarchar" MaxLength="255" />
+          <Property Name="tinhthanh" Type="nvarchar" MaxLength="255" />
+          <Property Name="lon" Type="float" />
+          <Property Name="lat" Type="float" />
+          <Property Name="date_update" Type="datetime" />
+          <Property Name="formatted_address" Type="nvarchar" MaxLength="501" />
+        </EntityType>
+        <EntityType Name="country_config">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
+          <Property Name="country_end" Type="int" />
+        </EntityType>
+        <EntityType Name="country_place_nearby">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="country_id" Type="int" />
+          <Property Name="types" Type="nvarchar" MaxLength="255" />
+          <Property Name="type" Type="nvarchar" MaxLength="100" />
+          <Property Name="lat" Type="float" />
+          <Property Name="lng" Type="float" />
+          <Property Name="icon" Type="nvarchar" MaxLength="501" />
+          <Property Name="name" Type="nvarchar" MaxLength="250" />
+          <Property Name="photo_height" Type="int" />
+          <Property Name="photo_width" Type="int" />
+          <Property Name="photo_html" Type="ntext" />
+          <Property Name="rating" Type="float" />
+          <Property Name="scope" Type="nvarchar" MaxLength="50" />
+          <Property Name="vicinity" Type="nvarchar" MaxLength="501" />
+        </EntityType>
         <EntityType Name="result_booking">
           <Key>
             <PropertyRef Name="id" />
@@ -71,6 +110,9 @@
         <EntityContainer Name="dicungModelStoreContainer">
           <EntitySet Name="booking" EntityType="Self.booking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="configs" EntityType="Self.configs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="countries" EntityType="Self.countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="country_config" EntityType="Self.country_config" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="country_place_nearby" EntityType="Self.country_place_nearby" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="result_booking" EntityType="Self.result_booking" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -111,6 +153,9 @@
           <EntitySet Name="bookings" EntityType="Self.booking" />
           <EntitySet Name="configs" EntityType="dicungModel.config" />
           <EntitySet Name="result_booking" EntityType="dicungModel.result_booking" />
+          <EntitySet Name="countries" EntityType="dicungModel.country" />
+          <EntitySet Name="country_config" EntityType="dicungModel.country_config" />
+          <EntitySet Name="country_place_nearby" EntityType="dicungModel.country_place_nearby" />
         </EntityContainer>
         <EntityType Name="config">
           <Key>
@@ -144,6 +189,45 @@
           <Property Name="km1" Type="Double" />
           <Property Name="km2" Type="Double" />
           <Property Name="total_money" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quanhuyen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tinhthanh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="lon" Type="Double" />
+          <Property Name="lat" Type="Double" />
+          <Property Name="date_update" Type="DateTime" Precision="3" />
+          <Property Name="formatted_address" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="country_config">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="country_end" Type="Int32" />
+        </EntityType>
+        <EntityType Name="country_place_nearby">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="country_id" Type="Int32" />
+          <Property Name="types" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lat" Type="Double" />
+          <Property Name="lng" Type="Double" />
+          <Property Name="icon" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="photo_height" Type="Int32" />
+          <Property Name="photo_width" Type="Int32" />
+          <Property Name="photo_html" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="rating" Type="Double" />
+          <Property Name="scope" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="vicinity" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -213,6 +297,48 @@
                 <ScalarProperty Name="from_location" ColumnName="from_location" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="book_id" ColumnName="book_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="countries">
+            <EntityTypeMapping TypeName="dicungModel.country">
+              <MappingFragment StoreEntitySet="countries">
+                <ScalarProperty Name="formatted_address" ColumnName="formatted_address" />
+                <ScalarProperty Name="date_update" ColumnName="date_update" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="lon" ColumnName="lon" />
+                <ScalarProperty Name="tinhthanh" ColumnName="tinhthanh" />
+                <ScalarProperty Name="quanhuyen" ColumnName="quanhuyen" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="country_config">
+            <EntityTypeMapping TypeName="dicungModel.country_config">
+              <MappingFragment StoreEntitySet="country_config">
+                <ScalarProperty Name="country_end" ColumnName="country_end" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="country_place_nearby">
+            <EntityTypeMapping TypeName="dicungModel.country_place_nearby">
+              <MappingFragment StoreEntitySet="country_place_nearby">
+                <ScalarProperty Name="vicinity" ColumnName="vicinity" />
+                <ScalarProperty Name="scope" ColumnName="scope" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="photo_html" ColumnName="photo_html" />
+                <ScalarProperty Name="photo_width" ColumnName="photo_width" />
+                <ScalarProperty Name="photo_height" ColumnName="photo_height" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="icon" ColumnName="icon" />
+                <ScalarProperty Name="lng" ColumnName="lng" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="types" ColumnName="types" />
+                <ScalarProperty Name="country_id" ColumnName="country_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

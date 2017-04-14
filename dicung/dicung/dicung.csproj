@@ -151,6 +151,15 @@
     <Compile Include="Models\config.cs">
       <DependentUpon>dicungDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\country.cs">
+      <DependentUpon>dicungDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\country_config.cs">
+      <DependentUpon>dicungDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\country_place_nearby.cs">
+      <DependentUpon>dicungDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\dicungDbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,6 +182,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\sbadmin2\css\sb-admin-2.css" />
@@ -389,6 +400,14 @@
       <DependentUpon>dicungDbModel.edmx</DependentUpon>
       <LastGenOutput>dicungDbModel.cs</LastGenOutput>
     </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\dicung.net.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Content\parallax\pickadate\legacy.js" />
@@ -481,14 +500,13 @@
     <Content Include="Views\admin\Index.cshtml" />
     <Content Include="Views\admin\listbooking.cshtml" />
     <Content Include="Views\admin\listwaybooking.cshtml" />
+    <Content Include="Views\admin\getlonglatquanhuyen.cshtml" />
+    <Content Include="Views\admin\getnearbyrestaurent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
