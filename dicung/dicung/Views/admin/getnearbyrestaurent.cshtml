@@ -19,8 +19,12 @@
 
         </div>
 
+        
+
         <div class="row">
             <div class="col-md-12">
+
+
                 @if (TempData["Updated"] != null)
                 {
                     <div class="alert alert-success alert-dismissible fade in" role="alert">
@@ -58,9 +62,13 @@
 
                             <div class="form-group">
                                 <button class="btn btn-primary" id="btngetdata"><i class="fa fa-map"></i> Lấy dữ liệu</button>
+                                
                             </div>
+                            
                         }
                     </div>
+                    
+                    <div id="time"></div>
                     @*<script>
                         function validate() {
                             if (document.getElementById("type").value === "") {
@@ -92,17 +100,52 @@
 @section scripts {
 
     <script>
-        $('#getnearby').on('submit', function () {
-            //e.preventDefault();
-            if (document.getElementById("type").value === "") {
-                alert('Vui lòng chọn dữ liệu cần lấy.');
-                document.getElementById("type").focus();
-                return false;
+    $('#getnearby').on('submit', function () {
+        //e.preventDefault();
+        if (document.getElementById("type").value === "") {
+            alert('Vui lòng chọn dữ liệu cần lấy.');
+            document.getElementById("type").focus();
+            return false;
+        }
+        $('#btngetdata').html('<i class="fa fa-spinner fa-spin fa-fw"></i> Đang lấy dữ liệu');
+        document.getElementById("btngetdata").disabled = true;
+
+    })
+
+    @if (ViewBag.next == "ok")
+        {
+            <text>startTime();</text>
+        }
+
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+    function startTime() {
+        // add a zero in front of numbers<10
+
+        var time = document.getElementById("time");
+        var counter = 10;
+        time.innerHTML = "Hệ thống sẽ tự động lấy dữ liệu @ViewBag.type sau: <b>" + counter.toString() + "</b> giây còn lại.";
+        var id;
+               
+
+        id = setInterval(function() {
+            counter--;
+            if (counter < 0) {                
+                var url = window.location.href;
+                window.location.href = url;
+                clearInterval(id);
+            } else {
+                time.innerHTML = "Hệ thống sẽ tự động lấy dữ liệu @ViewBag.type sau: <b>" + counter.toString() + "</b> giây còn lại.";
             }
-            $('#btngetdata').html('<i class="fa fa-spinner fa-spin fa-fw"></i> Đang lấy dữ liệu');
-            document.getElementById("btngetdata").disabled = true;
-           
-        })
+        }, 1000);
+
+    }
+
 
     </script>
 
