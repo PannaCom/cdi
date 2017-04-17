@@ -102,6 +102,7 @@ namespace dicung.Controllers
                 newbooking.date_time = DateTime.Now;
                 newbooking.sex = model.sex ?? null;
                 newbooking.group_by = model.group_by ?? null;
+                newbooking.group_number = model.group_number ?? null;
                 db.bookings.Add(newbooking);
                 db.SaveChanges();
                 data.success = "1";

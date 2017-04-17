@@ -35,6 +35,7 @@
           <Property Name="money" Type="float" />
           <Property Name="date_time" Type="datetime" />
           <Property Name="group_by" Type="tinyint" />
+          <Property Name="group_number" Type="int" />
         </EntityType>
         <EntityType Name="configs">
           <Key>
@@ -230,6 +231,7 @@
           <Property Name="money" Type="Double" />
           <Property Name="date_time" Type="DateTime" Precision="3" />
           <Property Name="group_by" Type="Byte" />
+          <Property Name="group_number" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -317,6 +319,7 @@
           <EntitySetMapping Name="bookings">
             <EntityTypeMapping TypeName="dicungModel.booking">
               <MappingFragment StoreEntitySet="booking">
+                <ScalarProperty Name="group_number" ColumnName="group_number" />
                 <ScalarProperty Name="group_by" ColumnName="group_by" />
                 <ScalarProperty Name="date_time" ColumnName="date_time" />
                 <ScalarProperty Name="money" ColumnName="money" />
