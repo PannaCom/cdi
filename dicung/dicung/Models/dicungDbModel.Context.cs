@@ -25,11 +25,11 @@ namespace dicung.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<booking> bookings { get; set; }
         public virtual DbSet<config> configs { get; set; }
         public virtual DbSet<result_booking> result_booking { get; set; }
         public virtual DbSet<country> countries { get; set; }
         public virtual DbSet<country_config> country_config { get; set; }
         public virtual DbSet<country_place_nearby> country_place_nearby { get; set; }
+        public virtual DbSet<booking> bookings { get; set; }
     }
 }

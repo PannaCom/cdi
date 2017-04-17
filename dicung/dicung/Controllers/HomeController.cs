@@ -100,6 +100,8 @@ namespace dicung.Controllers
                 newbooking.type_vehicle = model.type_vehicle ?? null;
                 newbooking.status = 0;
                 newbooking.date_time = DateTime.Now;
+                newbooking.sex = model.sex ?? null;
+                newbooking.group_by = model.group_by ?? null;
                 db.bookings.Add(newbooking);
                 db.SaveChanges();
                 data.success = "1";

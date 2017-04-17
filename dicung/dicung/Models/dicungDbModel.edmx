@@ -34,6 +34,7 @@
           <Property Name="status" Type="tinyint" />
           <Property Name="money" Type="float" />
           <Property Name="date_time" Type="datetime" />
+          <Property Name="group_by" Type="tinyint" />
         </EntityType>
         <EntityType Name="configs">
           <Key>
@@ -119,43 +120,13 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dicungModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="booking">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="full_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="pass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="public_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="birth_day" Type="DateTime" Precision="0" />
-          <Property Name="sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="time_go" Type="Time" Precision="7" />
-          <Property Name="time_to" Type="Time" Precision="7" />
-          <Property Name="from_location" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
-          <Property Name="long_from" Type="Double" />
-          <Property Name="lat_from" Type="Double" />
-          <Property Name="to_location" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
-          <Property Name="long_to" Type="Double" />
-          <Property Name="lat_to" Type="Double" />
-          <Property Name="km1" Type="Double" />
-          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="type_vehicle" Type="String" MaxLength="151" FixedLength="false" Unicode="true" />
-          <Property Name="des" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="group_id" Type="Int32" />
-          <Property Name="group_name" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="Byte" />
-          <Property Name="money" Type="Double" />
-          <Property Name="date_time" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityContainer Name="dicungDbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="bookings" EntityType="Self.booking" />
           <EntitySet Name="configs" EntityType="dicungModel.config" />
           <EntitySet Name="result_booking" EntityType="dicungModel.result_booking" />
           <EntitySet Name="countries" EntityType="dicungModel.country" />
           <EntitySet Name="country_config" EntityType="dicungModel.country_config" />
           <EntitySet Name="country_place_nearby" EntityType="dicungModel.country_place_nearby" />
+          <EntitySet Name="bookings" EntityType="dicungModel.booking" />
         </EntityContainer>
         <EntityType Name="config">
           <Key>
@@ -229,43 +200,43 @@
           <Property Name="scope" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="vicinity" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="booking">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="full_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="public_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="birth_day" Type="DateTime" Precision="0" />
+          <Property Name="sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="time_go" Type="Time" Precision="7" />
+          <Property Name="time_to" Type="Time" Precision="7" />
+          <Property Name="from_location" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
+          <Property Name="long_from" Type="Double" />
+          <Property Name="lat_from" Type="Double" />
+          <Property Name="to_location" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
+          <Property Name="long_to" Type="Double" />
+          <Property Name="lat_to" Type="Double" />
+          <Property Name="km1" Type="Double" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="type_vehicle" Type="String" MaxLength="151" FixedLength="false" Unicode="true" />
+          <Property Name="des" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="group_id" Type="Int32" />
+          <Property Name="group_name" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Byte" />
+          <Property Name="money" Type="Double" />
+          <Property Name="date_time" Type="DateTime" Precision="3" />
+          <Property Name="group_by" Type="Byte" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="dicungModelStoreContainer" CdmEntityContainer="dicungDbEntities">
-          <EntitySetMapping Name="bookings">
-            <EntityTypeMapping TypeName="dicungModel.booking">
-              <MappingFragment StoreEntitySet="booking">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="full_name" ColumnName="full_name" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="pass" ColumnName="pass" />
-                <ScalarProperty Name="public_code" ColumnName="public_code" />
-                <ScalarProperty Name="birth_day" ColumnName="birth_day" />
-                <ScalarProperty Name="sex" ColumnName="sex" />
-                <ScalarProperty Name="time_go" ColumnName="time_go" />
-                <ScalarProperty Name="time_to" ColumnName="time_to" />
-                <ScalarProperty Name="from_location" ColumnName="from_location" />
-                <ScalarProperty Name="long_from" ColumnName="long_from" />
-                <ScalarProperty Name="lat_from" ColumnName="lat_from" />
-                <ScalarProperty Name="to_location" ColumnName="to_location" />
-                <ScalarProperty Name="long_to" ColumnName="long_to" />
-                <ScalarProperty Name="lat_to" ColumnName="lat_to" />
-                <ScalarProperty Name="km1" ColumnName="km1" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="type_vehicle" ColumnName="type_vehicle" />
-                <ScalarProperty Name="des" ColumnName="des" />
-                <ScalarProperty Name="group_id" ColumnName="group_id" />
-                <ScalarProperty Name="group_name" ColumnName="group_name" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="money" ColumnName="money" />
-                <ScalarProperty Name="date_time" ColumnName="date_time" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="configs">
             <EntityTypeMapping TypeName="dicungModel.config">
               <MappingFragment StoreEntitySet="configs">
@@ -339,6 +310,38 @@
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="types" ColumnName="types" />
                 <ScalarProperty Name="country_id" ColumnName="country_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bookings">
+            <EntityTypeMapping TypeName="dicungModel.booking">
+              <MappingFragment StoreEntitySet="booking">
+                <ScalarProperty Name="group_by" ColumnName="group_by" />
+                <ScalarProperty Name="date_time" ColumnName="date_time" />
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="group_name" ColumnName="group_name" />
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="des" ColumnName="des" />
+                <ScalarProperty Name="type_vehicle" ColumnName="type_vehicle" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="km1" ColumnName="km1" />
+                <ScalarProperty Name="lat_to" ColumnName="lat_to" />
+                <ScalarProperty Name="long_to" ColumnName="long_to" />
+                <ScalarProperty Name="to_location" ColumnName="to_location" />
+                <ScalarProperty Name="lat_from" ColumnName="lat_from" />
+                <ScalarProperty Name="long_from" ColumnName="long_from" />
+                <ScalarProperty Name="from_location" ColumnName="from_location" />
+                <ScalarProperty Name="time_to" ColumnName="time_to" />
+                <ScalarProperty Name="time_go" ColumnName="time_go" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="birth_day" ColumnName="birth_day" />
+                <ScalarProperty Name="public_code" ColumnName="public_code" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

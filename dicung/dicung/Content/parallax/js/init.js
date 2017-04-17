@@ -5,7 +5,8 @@
     $('.parallax').parallax();
     
     $('#booking_type_vehicle').material_select();
-    $('#booking_type').material_select();
+    $('#booking_group').material_select();
+    $('#booking_sex').material_select();
 
 
   }); // end of document ready

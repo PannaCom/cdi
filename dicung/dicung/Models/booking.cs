@@ -39,5 +39,6 @@ namespace dicung.Models
         public Nullable<byte> status { get; set; }
         public Nullable<double> money { get; set; }
         public Nullable<System.DateTime> date_time { get; set; }
+        public Nullable<byte> group_by { get; set; }
     }
 }

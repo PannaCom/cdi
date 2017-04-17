@@ -95,6 +95,27 @@
 
                      <div class="row">
                          <div class="input-field col s12 m6">
+                             <input id="booking_group" name="booking_group" type="text" class="validate">
+                             <select name="booking_group" id="booking_group">
+                                 <option value="" disabled>Chọn Hộ nhóm</option>
+                                 <option value="1">Đi theo hộ gia đình</option>
+                                 <option value="2" selected>Đi theo nhóm</option>
+                             </select>
+                             <label for="booking_group">Đăng ký hộ nhóm</label>
+                         </div>
+                         <div class="input-field col s12 m6">
+                             <select name="booking_sex" id="booking_sex" class="validate">
+                                 <option value="" disabled>Chọn giới tính</option>
+                                 <option value="Nam" selected>Nam</option>
+                                 <option value="Nữ">Nữ</option>
+                             </select>
+                             <label for="booking_sex">Giới tính</label>
+                         </div>
+
+                     </div>
+
+                     <div class="row">
+                         <div class="input-field col s12 m6">
                              <input id="booking_phone" name="booking_phone" type="text" class="validate">
                              <label for="booking_phone">Số điện thoại</label>
                          </div>
@@ -314,6 +335,22 @@
                     document.getElementById("booking_email").focus();
                     return false;
                 }
+                
+                if ($("#booking_group").val() === "") {
+                    var msg = 'Vui lòng chọn hình thức đi!';
+                    Materialize.toast(msg, 4000);
+                    adderror('booking_group', msg);
+                    document.getElementById("booking_group").focus();
+                    return false;
+                }
+
+                if ($("#booking_sex").val() === "") {
+                    var msg = 'Vui lòng chọn giới tính!';
+                    Materialize.toast(msg, 4000);
+                    adderror('booking_sex', msg);
+                    document.getElementById("booking_sex").focus();
+                    return false;
+                }
 
                 if (document.getElementById("booking_phone").value === "") {
                     var msg = 'Vui lòng nhập số điện thoại!';
@@ -362,7 +399,9 @@
                     lat_to: document.getElementById("booking_lat_to").value,
                     km1: document.getElementById("booking_km1").value,
                     type: 'lamchung',
-                    type_vehicle: 'DRIVING'
+                    type_vehicle: 'DRIVING',
+                    sex: document.getElementById('booking_sex').value,
+                    group_by: document.getElementById('booking_group').value,
                 };
 
                 //console.log($formdata);
