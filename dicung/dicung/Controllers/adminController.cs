@@ -257,5 +257,56 @@ namespace dicung.Controllers
 
         #endregion
 
+        public class people
+        {
+            public string full_name { get; set; }
+            public string phone { get; set; }
+            public string email { get; set; }
+            public TimeSpan? time_go { get; set; }
+            public TimeSpan? time_to { get; set; }
+            public string from_location { get; set; }
+            public double? long_from { get; set; }
+            public double? lat_from { get; set; }
+            public string to_location { get; set; }
+            public double? long_to { get; set; }
+            public double? lat_to { get; set; }
+            public double? km1 { get; set; }
+        }
+        public string calculate_for_car()
+        {
+            try
+            {
+                people[] pp = null;
+                people pt = new people();
+                var p = (from q in db.bookings where q.type_vehicle.Contains("DRIVING") && q.group_id == null orderby q.km1 select q).ToList();
+                pp = new people[p.Count];
+                for (int i = 0; i < p.Count; i++)
+                {
+                    pt = new people();
+                    pt.email = p[i].email;
+                    pt.from_location = p[i].from_location;
+                    pt.full_name = p[i].full_name;
+                    pt.km1 = p[i].km1;
+                    pt.lat_from = p[i].lat_from;
+                    pt.lat_to = p[i].lat_to;
+                    pt.long_from = p[i].long_from;
+                    pt.long_to = p[i].long_to;
+                    pt.phone = p[i].phone;
+                    pt.time_go = p[i].time_go;
+                    pt.time_to = p[i].time_to;
+                    pt.to_location = p[i].to_location;
+                    pp[i] = new people();
+                    pp[i] = pt;
+                }
+                int abc = 0;
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return "1";
+        }
     }
 }
