@@ -96,16 +96,15 @@
                      <div class="row">
                          <div class="input-field col s12 m6">
                              <select name="booking_group" id="booking_group">
-                                 <option value="" disabled>Chọn Hộ nhóm</option>
-                                 <option value="1">Đi theo hộ gia đình</option>
-                                 <option value="2" selected>Đi theo nhóm</option>
+                                 <option value="1" selected>Đi theo cá nhân</option>
+                                 <option value="2">Đi theo nhóm</option>
                              </select>
-                             <label for="booking_group">Đăng ký hộ nhóm</label>
+                             <label for="booking_group">Đăng ký theo</label>
                          </div>
-                         <div class="input-field col s12 m6" id="addnumberpeople" style="display: none;">
+                         @*<div class="input-field col s12 m6" id="addnumberpeople" style="display: none;">
                              <input id="booking_numberpeopele" name="booking_numberpeople" type="number" />
                              <label for="booking_numberpeopele">Số thành viên</label>
-                         </div>
+                         </div>*@
                          <div class="input-field col s12 m6">
                              <select name="booking_sex" id="booking_sex" class="validate">
                                  <option value="" disabled>Chọn giới tính</option>
@@ -175,16 +174,16 @@
 
             //};
 
-            $('#booking_group').on('change', function () {
-                var _lx = $(this).val();
-                if (_lx != null) {
-                    if (_lx == "1") {
-                        $('#addnumberpeople').fadeIn('300');
-                    } else if(_lx == "2") {
-                        $('#addnumberpeople').fadeOut('300');
-                    }
-                }
-            })
+            //$('#booking_group').on('change', function () {
+            //    var _lx = $(this).val();
+            //    if (_lx != null) {
+            //        if (_lx == "1") {
+            //            $('#addnumberpeople').fadeIn('300');
+            //        } else if(_lx == "2") {
+            //            $('#addnumberpeople').fadeOut('300');
+            //        }
+            //    }
+            //})
 
             var defaults = {
                 bounds: true,
@@ -358,15 +357,15 @@
                     return false;
                 }
 
-                if ($("#booking_group").val() === "1") {
-                    if ($("#booking_numberpeople").val() === "") {
-                        var msg = 'Vui lòng nhập số thành viên!';
-                        Materialize.toast(msg, 4000);
-                        adderror('booking_numberpeople', msg);
-                        document.getElementById("booking_numberpeople").focus();
-                        return false;
-                    }                    
-                }
+                //if ($("#booking_group").val() === "1") {
+                //    if ($("#booking_numberpeople").val() === "") {
+                //        var msg = 'Vui lòng nhập số thành viên!';
+                //        Materialize.toast(msg, 4000);
+                //        adderror('booking_numberpeople', msg);
+                //        document.getElementById("booking_numberpeople").focus();
+                //        return false;
+                //    }                    
+                //}
 
                 if ($("#booking_sex").val() === "") {
                     var msg = 'Vui lòng chọn giới tính!';
@@ -425,8 +424,8 @@
                     type: 'lamchung',
                     type_vehicle: 'DRIVING',
                     sex: document.getElementById('booking_sex').value,
-                    group_by: document.getElementById('booking_group').value,
-                    group_number: document.getElementById('booking_numberpeople').value
+                    group_by: document.getElementById('booking_group').value
+                    //group_number: document.getElementById('booking_numberpeople').value
                 };
 
                 //console.log($formdata);
