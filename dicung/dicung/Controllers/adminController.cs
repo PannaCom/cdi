@@ -280,7 +280,8 @@ namespace dicung.Controllers
                 people pt = new people();
                 var p = (from q in db.bookings where q.type_vehicle.Contains("DRIVING") && q.group_id == null orderby q.km1 select q).ToList();
                 pp = new people[p.Count];
-                for (int i = 0; i < p.Count; i++)
+                int i=0;
+                for (i = 0; i < p.Count; i++)
                 {
                     pt = new people();
                     pt.email = p[i].email;
@@ -298,8 +299,22 @@ namespace dicung.Controllers
                     pp[i] = new people();
                     pp[i] = pt;
                 }
-                int abc = 0;
-
+                int[] tt = new int[p.Count];
+                int group = 0;
+                //int abc = 0;
+                for (i = 0; i < p.Count-1; i++)
+                { 
+                    for (var j = i+1; j < p.Count; j++)
+                    if (tt[j] == 0 && dt(pp[i], pp[j])&& dtt(pp[i], pp[j]))                    
+                    {
+                        if (tt[i] == 0)
+                        {
+                            group++;
+                            tt[i] = group;
+                            tt[j] = group;
+                        }
+                    }
+                }
 
             }
             catch (Exception ex)
@@ -307,6 +322,37 @@ namespace dicung.Controllers
 
             }
             return "1";
+        }
+        //ACOS(SIN(PI()*" + lat + "/180.0)*SIN(PI()*lat1/180.0)+COS(PI()*" + lat + "/180.0)*COS(PI()*lat1/180.0)*COS(PI()*lon1/180.0-PI()*" + lon + "/180.0))*6371 
+        public bool dt(people p1, people p2)
+        {
+            double x1 =(double)(Math.PI * p1.lat_from) / 180;
+            double x2 = (double)(Math.PI * p2.lat_from) / 180;
+            double x3 = (double)(Math.PI * p1.lat_from / 180);
+            double x4 = (double)(Math.PI * p2.lat_from / 180);
+            double x5 = (double)(Math.PI * p2.long_from / 180);
+            double x6 = (double)(Math.PI * p1.long_from / 180);           
+            bool true1 = Math.Acos(Math.Sin(x1) * Math.Sin(x2) + Math.Cos(x3) * Math.Cos(x4) * Math.Cos(x5 - x6)) * 6371<3;
+            x1 = (double)(Math.PI * p1.lat_to) / 180;
+            x2 = (double)(Math.PI * p2.lat_to) / 180;
+            x3 = (double)(Math.PI * p1.lat_to / 180);
+            x4 = (double)(Math.PI * p2.lat_to / 180);
+            x5 = (double)(Math.PI * p2.long_to / 180);
+            x6 = (double)(Math.PI * p1.long_to / 180); 
+
+            bool true2 = Math.Acos(Math.Sin(x1) * Math.Sin(x2) + Math.Cos(x3) * Math.Cos(x4) * Math.Cos(x5 - x6)) * 6371 < 3;
+
+            return true1 & true2;
+        }
+        public bool dtt(people p1, people p2)
+        {
+            //Giờ đi phải sát nhau
+            TimeSpan dt =new TimeSpan(p2.time_go.Value.Ticks - p1.time_go.Value.Ticks);
+            bool true1 = Math.Abs(dt.TotalMinutes) <= 60;
+            //Giờ về phải sát nhau
+            dt = dt = new TimeSpan(p2.time_to.Value.Ticks - p1.time_to.Value.Ticks);
+            bool true2 = Math.Abs(dt.TotalMinutes) <= 60;
+            return true1 & true2;
         }
     }
 }
