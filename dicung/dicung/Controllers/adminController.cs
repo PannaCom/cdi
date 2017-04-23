@@ -8,6 +8,7 @@ using dicung.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Data.Entity;
+using System.IO;
 
 namespace dicung.Controllers
 {
@@ -303,16 +304,29 @@ namespace dicung.Controllers
                 int group = 0;
                 //int abc = 0;
                 for (i = 0; i < p.Count-1; i++)
+                if (tt[i] == 0)
                 { 
+                    var count=0;
+                    string rs = "";
                     for (var j = i+1; j < p.Count; j++)
                     if (tt[j] == 0 && dt(pp[i], pp[j])&& dtt(pp[i], pp[j]))                    
                     {
                         if (tt[i] == 0)
                         {
+                            count++;
                             group++;
                             tt[i] = group;
                             tt[j] = group;
+                            rs += pp[j].full_name + ", " + pp[j].from_location + "-->" + pp[j].to_location + ", " + pp[j].time_go + ", " + pp[j].time_to + "\r\n";
                         }
+                        if (count >= 3) break;
+                    }
+                    if (rs != "")
+                    {
+                        rs = pp[i].full_name + ", " + pp[i].from_location + "-->" + pp[i].to_location + ", " + pp[i].time_go + ", " + pp[i].time_to + "\r\n"+rs;
+                        StreamWriter sw = new StreamWriter(Server.MapPath(@"\")+"/rs" + group + ".txt");
+                        sw.WriteLine(rs);
+                        sw.Close();
                     }
                 }
 
